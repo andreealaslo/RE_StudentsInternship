@@ -14,7 +14,7 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-        @PostMapping("/register")
+    @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
         String response = authService.register(request);
         if (response.equals("Email already exists.")) {
