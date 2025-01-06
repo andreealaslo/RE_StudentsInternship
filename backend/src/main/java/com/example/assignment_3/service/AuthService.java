@@ -44,7 +44,7 @@ public class AuthService {
             return "Invalid credentials.";
         }
 
-        return "Login successful for user: " + user.getName();
+        return user.getName();
     }
 }
 
