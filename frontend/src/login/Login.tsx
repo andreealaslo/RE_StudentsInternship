@@ -26,8 +26,14 @@ const Login: React.FC = () => {
 
             if (response.ok) {
                 const name = await response.text();
-                toast.success(`Welcome, ${name}!`);
-                // navigate("/profile");
+                if (name != "") {
+                    toast.success(`Welcome, ${name}!`);
+                } else {
+                    toast.success(`Welcome!`);
+                }
+                setTimeout(() => {
+                    navigate("/internships");
+                }, 2000);
             } else {
                 const errorMessage = await response.text();
                 console.error("Login failed:", errorMessage);

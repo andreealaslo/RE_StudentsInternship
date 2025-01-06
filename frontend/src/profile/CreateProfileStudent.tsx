@@ -86,7 +86,7 @@ const CreateProfileStudent: React.FC = () => {
                 );
                 setTimeout(() => {
                     navigate("/"); // Redirect to login page
-                }, 2200);
+                }, 2000);
             } else {
                 const errorMessage = await response.text();
                 console.error("Profile creation failed:", errorMessage);
