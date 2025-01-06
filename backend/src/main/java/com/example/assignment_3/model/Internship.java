@@ -31,4 +31,6 @@ public class Internship {
     @Column(nullable = false)
     private String requirements;
 
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean isActive = true;
 }

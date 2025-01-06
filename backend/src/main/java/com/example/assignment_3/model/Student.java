@@ -56,4 +56,5 @@ public class Student {
 
     @ElementCollection
     private List<String> hobbies;
+
 }
