@@ -46,12 +46,24 @@ const Register: React.FC = () => {
             );
 
             if (response.ok) {
-                const message = await response.text();
-                console.log("Registration successful:", message);
+                const userId = await response.text();
+                console.log(
+                    "Registration successful for user with id:",
+                    userId
+                );
                 toast.success(
                     "Registration successful! Please create your profile."
                 );
-                // navigate("/create-profile");
+
+                if (userType === "STUDENT") {
+                    navigate("/create-profile/student", { state: { userId } });
+                } else if (userType === "UNIVERSITY") {
+                    navigate("/create-profile/university", {
+                        state: { userId },
+                    });
+                } else {
+                    navigate("/create-profile/company", { state: { userId } });
+                }
             } else {
                 const errorMessage = await response.text();
                 console.error("Registration failed:", errorMessage);
