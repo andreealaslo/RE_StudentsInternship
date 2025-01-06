@@ -6,6 +6,8 @@ import {
     Grid2,
     Typography,
     Button,
+    CircularProgress,
+    Box,
 } from "@mui/material";
 import { Search } from "@mui/icons-material";
 import "./ListInternships.css";
@@ -27,6 +29,7 @@ const ListInternships: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [filteredInternships, setFilteredInternships] =
         useState<Internship[]>(internships);
+    const [loading, setLoading] = useState<boolean>(true);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -44,6 +47,8 @@ const ListInternships: React.FC = () => {
                 }
             } catch (error) {
                 console.error("Error fetching internships:", error);
+            } finally {
+                setLoading(false);
             }
         };
 
@@ -97,78 +102,89 @@ const ListInternships: React.FC = () => {
                 </IconButton>
             </div>
 
-            <Grid2 container spacing={3} className="internships-list">
-                {filteredInternships.length > 0 ? (
-                    filteredInternships.map((internship) => (
-                        <Grid2
-                            item
-                            xs={12}
-                            sm={6}
-                            md={4}
-                            key={internship.id}
-                            component="div"
-                        >
-                            <div className="internship-card">
-                                <Typography
-                                    variant="h6"
-                                    className="internship-title"
-                                    onClick={() =>
-                                        handleViewDetails(internship.id)
-                                    }
-                                    style={{
-                                        cursor: "pointer",
-                                        color: "#1976d2",
-                                        marginBottom: "8px",
-                                    }}
-                                >
-                                    {internship.title}
-                                </Typography>
-                                <Typography
-                                    variant="body1"
-                                    color="textSecondary"
-                                    style={{
-                                        marginBottom: "8px",
-                                    }}
-                                >
-                                    Company: {internship.company.name}
-                                </Typography>
-                                <Typography
-                                    variant="body1"
-                                    color="textSecondary"
-                                    style={{
-                                        marginBottom: "8px",
-                                    }}
-                                >
-                                    Location: {internship.location}
-                                </Typography>
-                                <Typography
-                                    variant="body1"
-                                    color="textSecondary"
-                                    style={{
-                                        marginBottom: "16px",
-                                    }}
-                                >
-                                    Duration: {internship.duration}
-                                </Typography>
-                                <Button
-                                    onClick={() =>
-                                        handleViewDetails(internship.id)
-                                    }
-                                    variant="contained"
-                                    color="primary"
-                                    fullWidth
-                                >
-                                    View Details
-                                </Button>
-                            </div>
-                        </Grid2>
-                    ))
-                ) : (
-                    <Typography variant="body1">
-                        No internships found matching your search.
-                    </Typography>
-                )}
-            </Grid2>
+            {loading ? (
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    minHeight="50vh"
+                >
+                    <CircularProgress />
+                </Box>
+            ) : (
+                <Grid2 container spacing={3} className="internships-list">
+                    {filteredInternships.length > 0 ? (
+                        filteredInternships.map((internship) => (
+                            <Grid2
+                                item
+                                xs={12}
+                                sm={6}
+                                md={4}
+                                key={internship.id}
+                                component="div"
+                            >
+                                <div className="internship-card">
+                                    <Typography
+                                        variant="h6"
+                                        className="internship-title"
+                                        onClick={() =>
+                                            handleViewDetails(internship.id)
+                                        }
+                                        style={{
+                                            cursor: "pointer",
+                                            color: "#1976d2",
+                                            marginBottom: "8px",
+                                        }}
+                                    >
+                                        {internship.title}
+                                    </Typography>
+                                    <Typography
+                                        variant="body1"
+                                        color="textSecondary"
+                                        style={{
+                                            marginBottom: "8px",
+                                        }}
+                                    >
+                                        Company: {internship.company.name}
+                                    </Typography>
+                                    <Typography
+                                        variant="body1"
+                                        color="textSecondary"
+                                        style={{
+                                            marginBottom: "8px",
+                                        }}
+                                    >
+                                        Location: {internship.location}
+                                    </Typography>
+                                    <Typography
+                                        variant="body1"
+                                        color="textSecondary"
+                                        style={{
+                                            marginBottom: "16px",
+                                        }}
+                                    >
+                                        Duration: {internship.duration}
+                                    </Typography>
+                                    <Button
+                                        onClick={() =>
+                                            handleViewDetails(internship.id)
+                                        }
+                                        variant="contained"
+                                        color="primary"
+                                        fullWidth
+                                    >
+                                        View Details
+                                    </Button>
+                                </div>
+                            </Grid2>
+                        ))
+                    ) : (
+                        <Typography variant="body1">
+                            No internships found matching your search.
+                        </Typography>
+                    )}
+                </Grid2>
+            )}
         </div>
     );
 };

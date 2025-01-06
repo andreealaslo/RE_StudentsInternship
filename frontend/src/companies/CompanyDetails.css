@@ -1,0 +1,42 @@
+body, html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #eef2f7;
+}
+
+.company-details-container {
+    
+    width: 200%;
+    max-width: 700px;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    position: relative;
+    text-align: left;
+}
+
+.company-details-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.detail-item {
+    margin-top: 12px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.divider {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    background-color: #ddd;
+}
