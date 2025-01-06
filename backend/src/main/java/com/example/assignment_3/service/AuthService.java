@@ -30,7 +30,7 @@ public class AuthService {
 
         userRepository.save(user);
 
-        return "User registered successfully.";
+        return user.getId().toString();
     }
 
     public String login(String email, String password) {

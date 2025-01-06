@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./login/Login";
 import Register from "./register/Register";
+import CreateProfileStudent from "./profile/CreateProfileStudent";
+import CreateProfileCompany from "./profile/CreateProfileCompany";
+import CreateProfileUniversity from "./profile/CreateProfileUniversity";
 
 const App: React.FC = () => {
     return (
@@ -9,6 +12,18 @@ const App: React.FC = () => {
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/register" element={<Register />} />
+                <Route
+                    path="/create-profile/student"
+                    element={<CreateProfileStudent />}
+                />
+                <Route
+                    path="/create-profile/university"
+                    element={<CreateProfileUniversity />}
+                />
+                <Route
+                    path="/create-profile/company"
+                    element={<CreateProfileCompany />}
+                />
             </Routes>
         </Router>
     );

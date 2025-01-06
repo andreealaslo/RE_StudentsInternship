@@ -1,18 +1,18 @@
 body, html {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
     background-color: #f0f4f8;
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
-.register-container {
+.create-profile-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     width: 100%;
     max-width: 100vw;
@@ -20,28 +20,30 @@ body, html {
     box-sizing: border-box;
 }
 
-.register-title {
+.create-profile-title {
     font-size: 2rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1.5rem;
     color: #333;
     text-align: center;
 }
 
-.register-form {
+.create-profile-form {
     display: flex;
     flex-direction: column;
-    width: 150%;
-    max-width: 400px;
+    width: 200%;
+    max-width: 700px;
     background: #fff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+    overflow-y: auto;
+    max-height: 90vh;
 }
 
-.register-input,
-.register-select {
-    padding: 12px;
+.create-profile-textarea,
+.create-profile-input {
+    padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -50,25 +52,42 @@ body, html {
     box-sizing: border-box;
 }
 
-.register-button {
-    padding: 12px;
-    margin: 10px 0;
+.array-field {
+    margin-bottom: 1rem;
+}
+
+.array-input {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.add-button,
+.remove-button,
+.create-profile-submit-button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
     border: none;
     border-radius: 5px;
     font-size: 1rem;
     cursor: pointer;
-    width: 100%;
-    box-sizing: border-box;
-    background-color: #28a745;
-    color: #fff;
 }
 
-.register-button:hover {
-    background-color: #218838;
+.add-button:hover,
+.remove-button:hover,
+.create-profile-submit-button:hover {
+    background-color: #0056b3;
 }
 
 @media (max-width: 750px) {
-    .register-form {
+    .create-profile-form {
         width: 100%;
+        max-height: 100vh;
+    }
+
+    .create-profile-title {
+        font-size: 1.5rem;
     }
 }
