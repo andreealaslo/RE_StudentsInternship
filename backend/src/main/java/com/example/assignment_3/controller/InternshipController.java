@@ -2,6 +2,7 @@ package com.example.assignment_3.controller;
 
 import com.example.assignment_3.dto.InternshipDTO;
 import com.example.assignment_3.model.Internship;
+import com.example.assignment_3.repository.InternshipRepository;
 import com.example.assignment_3.service.InternshipService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ public class InternshipController {
     @Autowired
     private InternshipService internshipService;
 
+    @Autowired
+    private InternshipRepository internshipRepository;
+
     @GetMapping("/{id}")
     public ResponseEntity<Internship> getInternshipById(@PathVariable Long id) {
         Internship internship = internshipService.getInternshipById(id);
@@ -28,9 +32,10 @@ public class InternshipController {
         return ResponseEntity.ok(response);
     }
 
+    //display only internships that are active, if they are inactive it means that a candidate was selected
     @GetMapping("/")
-    public ResponseEntity<List<Internship>> getAllInternships() {
-        List<Internship> internships = internshipService.getAllInternships();
+    public ResponseEntity<List<Internship>> getActiveInternships() {
+        List<Internship> internships = internshipRepository.findByIsActive(true);
         return ResponseEntity.ok(internships);
     }
 
