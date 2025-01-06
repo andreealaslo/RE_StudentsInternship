@@ -86,7 +86,7 @@ const CreateProfileStudent: React.FC = () => {
                 );
                 setTimeout(() => {
                     navigate("/"); // Redirect to login page
-                }, 2200);
+                }, 2000);
             } else {
                 const errorMessage = await response.text();
                 console.error("Profile creation failed:", errorMessage);
@@ -241,34 +241,38 @@ const CreateProfileStudent: React.FC = () => {
                 ].map((field) => (
                     <div key={field} className="array-field">
                         <label>{formatField(field)}</label>
-                        {formData[field as keyof typeof formData].map(
-                            (item, index) => (
-                                <div key={index} className="array-input">
-                                    <input
-                                        type="text"
-                                        placeholder={`Enter ${field}`}
-                                        value={item}
-                                        onChange={(e) =>
-                                            handleArrayChange(
-                                                field,
-                                                index,
-                                                e.target.value
-                                            )
-                                        }
-                                        className="create-profile-input"
-                                    />
-                                    <button
-                                        type="button"
-                                        onClick={() =>
-                                            handleRemoveItem(field, index)
-                                        }
-                                        className="remove-button"
-                                    >
-                                        Remove
-                                    </button>
-                                </div>
-                            )
-                        )}
+                        {Array.isArray(formData[field as keyof typeof formData])
+                            ? (
+                                  formData[
+                                      field as keyof typeof formData
+                                  ] as string[]
+                              ).map((item, index) => (
+                                  <div key={index} className="array-input">
+                                      <input
+                                          type="text"
+                                          placeholder={`Enter ${field}`}
+                                          value={item}
+                                          onChange={(e) =>
+                                              handleArrayChange(
+                                                  field,
+                                                  index,
+                                                  e.target.value
+                                              )
+                                          }
+                                          className="create-profile-input"
+                                      />
+                                      <button
+                                          type="button"
+                                          onClick={() =>
+                                              handleRemoveItem(field, index)
+                                          }
+                                          className="remove-button"
+                                      >
+                                          Remove
+                                      </button>
+                                  </div>
+                              ))
+                            : null}
                         <button
                             type="button"
                             onClick={() => handleAddItem(field)}

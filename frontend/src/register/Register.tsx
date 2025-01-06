@@ -55,14 +55,28 @@ const Register: React.FC = () => {
                     "Registration successful! Please create your profile."
                 );
 
+                setTimeout(() => {
+                    navigate("/"); // Redirect to login page
+                }, 2000);
+
                 if (userType === "STUDENT") {
-                    navigate("/create-profile/student", { state: { userId } });
+                    setTimeout(() => {
+                        navigate("/create-profile/student", {
+                            state: { userId },
+                        });
+                    }, 2000);
                 } else if (userType === "UNIVERSITY") {
-                    navigate("/create-profile/university", {
-                        state: { userId },
-                    });
+                    setTimeout(() => {
+                        navigate("/create-profile/university", {
+                            state: { userId },
+                        });
+                    }, 2000);
                 } else {
-                    navigate("/create-profile/company", { state: { userId } });
+                    setTimeout(() => {
+                        navigate("/create-profile/company", {
+                            state: { userId },
+                        });
+                    }, 2000);
                 }
             } else {
                 const errorMessage = await response.text();
