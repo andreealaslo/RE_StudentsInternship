@@ -2,11 +2,14 @@ package com.example.assignment_3.service;
 
 import com.example.assignment_3.dto.CompanyDTO;
 import com.example.assignment_3.model.Company;
+import com.example.assignment_3.model.Internship;
 import com.example.assignment_3.model.User;
 import com.example.assignment_3.repository.CompanyRepository;
 import com.example.assignment_3.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CompanyService {
@@ -33,5 +36,13 @@ public class CompanyService {
 
         companyRepository.save(company);
         return "Company profile created successfully.";
+    }
+
+    public List<Company> getAllCompanies() {
+        return companyRepository.findAll();
+    }
+
+    public Company getCompanyByUserId(Long id) {
+        return companyRepository.findByUserId(id);
     }
 }
