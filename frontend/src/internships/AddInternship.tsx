@@ -69,7 +69,7 @@ const AddInternship: React.FC = () => {
             if (response.ok) {
                 setSuccessMessage("Internship added successfully!");
                 setTimeout(() => {
-                    navigate(`/internships?userType=COMPANY`);
+                    navigate("/internships");
                 }, 2000);
             } else {
                 const errorData = await response.json();

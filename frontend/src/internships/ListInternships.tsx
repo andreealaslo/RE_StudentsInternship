@@ -34,7 +34,10 @@ const ListInternships: React.FC = () => {
     const [companyId, setCompanyId] = useState<string | null>(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const userEmail = location.state?.email;
+
+    // Check if the email is stored in localStorage, if not fall back to location.state
+    const storedEmail = localStorage.getItem("userEmail");
+    const userEmail = storedEmail ? storedEmail : location.state?.email;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -118,6 +121,23 @@ const ListInternships: React.FC = () => {
         navigate("/add-internship", { state: { companyId } });
     };
 
+    // Logout logic
+    const handleLogout = () => {
+        // Remove the email from localStorage when logging out
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userType");
+
+        // Redirect the user to the login page
+        navigate("/");
+    };
+
+    useEffect(() => {
+        if (userEmail) {
+            // Store the email in localStorage when it is available
+            localStorage.setItem("userEmail", userEmail);
+        }
+    }, [userEmail]);
+
     return (
         <div className="internships-container">
             <h1 className="internships-title">Internships</h1>
@@ -148,12 +168,15 @@ const ListInternships: React.FC = () => {
                 <IconButton onClick={handleSearch} color="primary">
                     <Search />
                 </IconButton>
-                {
-                userType === "COMPANY" && (
+                {userType === "COMPANY" && (
                     <IconButton onClick={handleAddInternship} color="secondary">
                         <Add />
                     </IconButton>
                 )}
+                {/* Logout Button */}
+                <Button variant="contained" color="secondary" onClick={handleLogout}>
+                    Logout
+                </Button>
             </div>
 
             {loading ? (
