@@ -34,7 +34,9 @@ const ListInternships: React.FC = () => {
     const [companyId, setCompanyId] = useState<string | null>(null);
     const navigate = useNavigate();
     const location = useLocation();
-    const userEmail = location.state?.email;
+
+    const storedEmail = localStorage.getItem("userEmail");
+    const userEmail = storedEmail ? storedEmail : location.state?.email;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -118,6 +120,22 @@ const ListInternships: React.FC = () => {
         navigate("/add-internship", { state: { companyId } });
     };
 
+    const handleLogout = () => {
+        // Remove the email from localStorage when logging out
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("userType");
+
+        // Redirect the user to the login page
+        navigate("/");
+    };
+
+    useEffect(() => {
+        if (userEmail) {
+            // Store the email in localStorage when it is available
+            localStorage.setItem("userEmail", userEmail);
+        }
+    }, [userEmail]);
+
     return (
         <div className="internships-container">
             <h1 className="internships-title">Internships</h1>
@@ -148,14 +166,16 @@ const ListInternships: React.FC = () => {
                 <IconButton onClick={handleSearch} color="primary">
                     <Search />
                 </IconButton>
-                {
-                userType === "COMPANY" && (
+                {userType === "COMPANY" && (
                     <IconButton onClick={handleAddInternship} color="secondary">
                         <Add />
                     </IconButton>
                 )}
+                <Button variant="contained" color="secondary" onClick={handleLogout}>
+                    Logout
+                </Button>
             </div>
-
+    
             {loading ? (
                 <Box
                     display="flex"
@@ -166,81 +186,42 @@ const ListInternships: React.FC = () => {
                     <CircularProgress />
                 </Box>
             ) : (
-                <Grid container spacing={3} className="internships-list">
+                <div className="internships-list">
                     {filteredInternships.length > 0 ? (
                         filteredInternships.map((internship) => (
-                            <Grid
-                                item={true}
-                                xs={12}
-                                sm={6}
-                                md={4}
-                                key={internship.id}
-                                component="div"
-                            >
-                                <div className="internship-card">
-                                    <Typography
-                                        variant="h6"
-                                        className="internship-title"
-                                        onClick={() =>
-                                            handleViewDetails(internship.id)
-                                        }
-                                        style={{
-                                            cursor: "pointer",
-                                            color: "#1976d2",
-                                            marginBottom: "8px",
-                                        }}
-                                    >
-                                        {internship.title}
-                                    </Typography>
-                                    <Typography
-                                        variant="body1"
-                                        color="textSecondary"
-                                        style={{
-                                            marginBottom: "8px",
-                                        }}
-                                    >
-                                        Company: {internship.company.name}
-                                    </Typography>
-                                    <Typography
-                                        variant="body1"
-                                        color="textSecondary"
-                                        style={{
-                                            marginBottom: "8px",
-                                        }}
-                                    >
-                                        Location: {internship.location}
-                                    </Typography>
-                                    <Typography
-                                        variant="body1"
-                                        color="textSecondary"
-                                        style={{
-                                            marginBottom: "16px",
-                                        }}
-                                    >
-                                        Duration: {internship.duration}
-                                    </Typography>
-                                    <Button
-                                        onClick={() =>
-                                            handleViewDetails(internship.id)
-                                        }
-                                        variant="contained"
-                                        color="primary"
-                                        fullWidth
-                                    >
-                                        View Details
-                                    </Button>
-                                </div>
-                            </Grid>
+                            <div key={internship.id} className="internship-card">
+                                <h3 className="internship-title">
+                                    {internship.title}
+                                </h3>
+                                <p className="internship-details">
+                                    Company: {internship.company.name}
+                                </p>
+                                <p className="internship-details">
+                                    Location: {internship.location}
+                                </p>
+                                <p className="internship-details">
+                                    Duration: {internship.duration}
+                                </p>
+                                <Button
+                                    onClick={() =>
+                                        handleViewDetails(internship.id)
+                                    }
+                                    variant="contained"
+                                    color="primary"
+                                    className="view-details-button"
+                                >
+                                    View Details
+                                </Button>
+                            </div>
                         ))
                     ) : (
-                        <Typography variant="body1">
-                            No internships found matching your search.
-                        </Typography>
+                        <p>No internships found matching your search.</p>
                     )}
-                </Grid>
+                </div>
             )}
         </div>
     );
+    
 };
 
 export default ListInternships;
