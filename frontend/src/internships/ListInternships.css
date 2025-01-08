@@ -6,7 +6,7 @@ body, html {
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow-y: auto; /* Enable vertical scrolling */
+    overflow: auto; /* Enable scrolling */
 }
 
 .internships-container {
@@ -14,9 +14,10 @@ body, html {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 100vw;
+    max-width: 1200px;
     padding: 20px;
     box-sizing: border-box;
+    overflow: auto; /* Allow the content to scroll if it overflows */
 }
 
 .internships-title {
@@ -30,18 +31,18 @@ body, html {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    width: 200%;
+    width: 100%;
+    justify-content: center;
 }
 
 .internships-list {
     display: flex;
-    align-items: center;
-    width: 300%;
-    max-width: 700px;
-    box-sizing: border-box;
-    overflow-y: auto;
-    max-height: 90vh;
+    flex-wrap: wrap; /* Ensure the internships are displayed horizontally */
+    gap: 20px; /* Space between internship cards */
+    justify-content: center;
+    width: 100%;
     margin-top: 20px;
+    overflow-x: hidden; /* Avoid horizontal scrolling */
 }
 
 .internship-card {
@@ -50,18 +51,31 @@ body, html {
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: left;
-    width: 300%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 280px; /* Fixed width for each internship card */
+    min-height: 320px; /* Adjusted height to fit all elements */
+    height: auto; /* Allow height to adjust based on content */
+    box-sizing: border-box;
 }
 
 .internship-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: bold;
     cursor: pointer;
     color: #1976d2;
+    margin-bottom: 8px;
 }
 
 .internship-title:hover {
     text-decoration: underline;
+}
+
+.internship-details {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 16px;
 }
 
 .view-details-button {
@@ -71,8 +85,34 @@ body, html {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    text-align: center;
+    width: 100%;
+    margin-top: auto; /* Push the button to the bottom of the card */
 }
 
 .view-details-button:hover {
     background-color: #1565c0;
+}
+
+.add-button, .logout-button {
+    margin-top: 15px;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+    .internships-title {
+        font-size: 2rem;
+    }
+    .internship-title {
+        font-size: 1.5rem;
+    }
+
+    .internship-card {
+        width: 100%; /* Ensure cards take full width on small screens */
+        min-height: 250px; /* Decrease height on small screens */
+    }
+
+    .view-details-button {
+        margin-top: 20px; /* Add some margin for better spacing */
+    }
 }
