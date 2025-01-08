@@ -41,7 +41,9 @@ const CreateProfileUniversity: React.FC = () => {
                     userId
                 );
                 setTimeout(() => {
-                    navigate("/"); // Redirect to login page
+                    navigate("/", {
+                        state: { userType: "UNIVERSITY" }, 
+                    });
                 }, 2000);
             } else {
                 const errorMessage = await response.text();

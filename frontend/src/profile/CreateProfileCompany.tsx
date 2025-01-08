@@ -46,7 +46,9 @@ const CreateProfileCompany: React.FC = () => {
                     userId
                 );
                 setTimeout(() => {
-                    navigate("/"); // Redirect to login page
+                    navigate("/", {
+                        state: { userType: "COMPANY" }, 
+                    });
                 }, 2000);
             } else {
                 const errorMessage = await response.text();

@@ -8,6 +8,7 @@ import CreateProfileUniversity from "./profile/CreateProfileUniversity";
 import ListInternships from "./internships/ListInternships";
 import InternshipDetails from "./internships/InternshipDetails";
 import CompanyDetails from "./companies/CompanyDetails";
+import AddInternship from "./internships/AddInternship";
 
 const App: React.FC = () => {
     return (
@@ -33,6 +34,7 @@ const App: React.FC = () => {
                     element={<InternshipDetails />}
                 />
                 <Route path="/companies/:id" element={<CompanyDetails />} />
+                <Route path="/add-internship" element={<AddInternship />} />
             </Routes>
         </Router>
     );

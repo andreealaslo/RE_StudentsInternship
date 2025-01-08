@@ -8,7 +8,6 @@ const Login: React.FC = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-
     const handleLogin = async () => {
         const loginData = { email, password };
 
@@ -32,7 +31,9 @@ const Login: React.FC = () => {
                     toast.success(`Welcome!`);
                 }
                 setTimeout(() => {
-                    navigate("/internships");
+                    navigate("/internships", {
+                        state: { email }, 
+                    });
                 }, 2000);
             } else {
                 const errorMessage = await response.text();
@@ -72,7 +73,7 @@ const Login: React.FC = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     className="login-input"
                 />
-                <button onClick={handleLogin} className="login-button">
+                <button onClick={ handleLogin} className="login-button">
                     Login
                 </button>
                 <button
