@@ -11,7 +11,6 @@ public class StudentDTO {
     private String location;
     private String linkedinLink;
     private String githubLink;
-    private String currentUniversityName;
     private String degree;
     private String expectedGraduationDate;
     private List<String> pastExperience;
@@ -19,4 +18,5 @@ public class StudentDTO {
     private List<String> projects;
     private List<String> knownLanguages;
     private List<String> hobbies;
+    private Long universityId;
 }
