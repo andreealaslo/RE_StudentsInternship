@@ -8,6 +8,8 @@ import com.example.assignment_3.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UniversityService {
 
@@ -28,5 +30,9 @@ public class UniversityService {
 
         universityRepository.save(university);
         return "University profile created successfully.";
+    }
+
+    public List<University> getAllUniversities() {
+        return universityRepository.findAll();
     }
 }

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect  } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import Select from "react-select"; // Import react-select
 import "./CreateProfile.css";
 
 const CreateProfileStudent: React.FC = () => {
@@ -11,7 +12,7 @@ const CreateProfileStudent: React.FC = () => {
         location: "",
         linkedinLink: "",
         githubLink: "",
-        currentUniversityName: "",
+        universityId: "",
         degree: "",
         expectedGraduationDate: "",
         pastExperience: [""],
@@ -20,9 +21,28 @@ const CreateProfileStudent: React.FC = () => {
         knownLanguages: [""],
         hobbies: [""],
     });
+    const [universities, setUniversities] = useState<any[]>([]); // List of universities
     const navigate = useNavigate();
     const location = useLocation();
     const { userId } = location.state as { userId: string };
+
+    // Fetch universities from the API on component mount
+    useEffect(() => {
+        const fetchUniversities = async () => {
+            try {
+                const response = await fetch("http://localhost:8080/api/university/");
+                if (response.ok) {
+                    const data = await response.json();
+                    setUniversities(data); // Set the universities in state
+                } else {
+                    toast.error("Failed to fetch universities.");
+                }
+            } catch (error) {
+                toast.error("Error fetching universities.");
+            }
+        };
+        fetchUniversities();
+    }, []);
 
     const handleChange = (
         e: React.ChangeEvent<
@@ -104,6 +124,31 @@ const CreateProfileStudent: React.FC = () => {
         return field
             .replace(/([A-Z])/g, " $1")
             .replace(/^./, (str) => str.toUpperCase());
+    };
+
+    const universityOptions = universities.map((university) => ({
+        value: university.id,
+        label: university.name,
+    }));
+    
+    // Custom styles for react-select
+    const customStyles = {
+        singleValue: (provided: any) => ({
+            ...provided,
+            color: "black", // Change the selected value text color
+        }),
+        option: (provided: any) => ({
+            ...provided,
+            color: "black", // Change the option text color
+        }),
+        control: (provided: any) => ({
+            ...provided,
+            borderColor: "#ccc", // Optional: you can customize the border color
+        }),
+        menu: (provided: any) => ({
+            ...provided,
+            borderRadius: "4px",
+        }),
     };
 
     return (
@@ -191,18 +236,31 @@ const CreateProfileStudent: React.FC = () => {
                     />
                 </div>
 
+                {/* University searchable dropdown */}
                 <div className="form-group">
-                    <label htmlFor="currentUniversityName">
-                        University Name
-                    </label>
-                    <input
-                        type="text"
-                        name="currentUniversityName"
-                        id="currentUniversityName"
-                        placeholder="University Name"
-                        value={formData.currentUniversityName}
-                        onChange={handleChange}
+                    <label htmlFor="universityId">University</label>
+                    <Select
+                        name="universityId"
+                        id="universityId"
+                        options={universityOptions} // Pass the formatted options
+                        value={{
+                            value: formData.universityId,
+                            label:
+                                universityOptions.find(
+                                    (option) =>
+                                        option.value === formData.universityId
+                                )?.label || "",
+                        }}
+                        onChange={(selectedOption) =>
+                            setFormData({
+                                ...formData,
+                                universityId: selectedOption?.value || "",
+                            })
+                        }
                         className="create-profile-input"
+                        placeholder="Search for a university"
+                        isClearable
+                        styles={customStyles}
                     />
                 </div>
 

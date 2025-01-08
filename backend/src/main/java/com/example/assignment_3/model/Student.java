@@ -34,9 +34,6 @@ public class Student {
     private String githubLink;
 
     @Column(nullable = false)
-    private String currentUniversityName;
-
-    @Column(nullable = false)
     private String degree;
 
     @Column(nullable = false)
@@ -57,4 +54,7 @@ public class Student {
     @ElementCollection
     private List<String> hobbies;
 
+    @ManyToOne
+    @JoinColumn(name = "university_id", nullable = false)
+    private University university;
 }
