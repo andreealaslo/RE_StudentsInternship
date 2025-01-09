@@ -1,6 +1,7 @@
 package com.example.assignment_3.controller;
 
 import com.example.assignment_3.dto.StudentDTO;
+import com.example.assignment_3.model.Internship;
 import com.example.assignment_3.model.Student;
 import com.example.assignment_3.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,12 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
+        Student student = studentService.getStudentById(id);
+        return ResponseEntity.ok(student);
+    }
 
     @PostMapping("/profile/{userId}")
     public ResponseEntity<String> createProfile(@RequestBody StudentDTO request, @PathVariable Long userId) {

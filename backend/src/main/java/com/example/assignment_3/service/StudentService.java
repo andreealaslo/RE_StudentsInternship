@@ -1,6 +1,7 @@
 package com.example.assignment_3.service;
 
 import com.example.assignment_3.dto.StudentDTO;
+import com.example.assignment_3.model.Internship;
 import com.example.assignment_3.model.Student;
 import com.example.assignment_3.model.University;
 import com.example.assignment_3.model.User;
@@ -21,6 +22,10 @@ public class StudentService {
     private UserRepository userRepository;
     @Autowired
     private UniversityRepository universityRepository;
+
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+    }
 
     public String createProfile(StudentDTO request, Long userId) {
 
