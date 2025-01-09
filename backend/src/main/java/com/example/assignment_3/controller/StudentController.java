@@ -1,9 +1,7 @@
 package com.example.assignment_3.controller;
 
 import com.example.assignment_3.dto.StudentDTO;
-import com.example.assignment_3.model.Internship;
 import com.example.assignment_3.model.Student;
-import com.example.assignment_3.model.University;
 import com.example.assignment_3.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

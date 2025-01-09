@@ -1,7 +1,6 @@
 package com.example.assignment_3.controller;
 
 import com.example.assignment_3.dto.UniversityDTO;
-import com.example.assignment_3.model.Company;
 import com.example.assignment_3.model.University;
 import com.example.assignment_3.service.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
