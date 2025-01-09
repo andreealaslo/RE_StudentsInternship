@@ -65,8 +65,8 @@ const ListMyApplications: React.FC = () => {
         }
     };
 
-    const handleViewDetails = (applicationId: number) => {
-        navigate(`/applications/${applicationId}`);
+    const handleViewDetails = (application: Application) => {
+        navigate(`/applications/${application.id}`, { state: { application } });
     };
 
     const handleLogout = () => {
@@ -132,7 +132,7 @@ const ListMyApplications: React.FC = () => {
                                         variant="contained"
                                         color="primary"
                                         onClick={() =>
-                                            handleViewDetails(application.id)
+                                            handleViewDetails(application)
                                         }
                                     >
                                         See Details

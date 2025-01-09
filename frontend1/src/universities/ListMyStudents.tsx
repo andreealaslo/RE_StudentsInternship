@@ -25,7 +25,7 @@ const ListMyStudents: React.FC = () => {
         if (universityId) {
             fetchStudents(universityId);
         } else {
-            console.error("University ID is required to fetch students.");
+            console.error("University ID not found in localStorage.");
         }
     }, [universityId]);
 

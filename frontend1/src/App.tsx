@@ -15,6 +15,7 @@ import InternshipApplications from "./internships/InternshipApplications";
 import ListMyStudents from "./universities/ListMyStudents";
 import StudentDetails from "./students/StudentDetails";
 import ListMyApplications from "./students/ListMyApplications";
+import ApplicationDetails from "./internship-applications/ApplicationDetails";
 
 const App: React.FC = () => {
     return (
@@ -52,6 +53,10 @@ const App: React.FC = () => {
                 <Route
                     path="/my-applications"
                     element={<ListMyApplications />}
+                />
+                <Route
+                    path="/applications/:id"
+                    element={<ApplicationDetails />}
                 />
             </Routes>
         </Router>
