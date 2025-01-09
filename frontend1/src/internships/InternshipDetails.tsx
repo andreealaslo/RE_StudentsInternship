@@ -99,14 +99,14 @@ const InternshipDetails: React.FC = () => {
                     body: JSON.stringify(applicationData),
                 }
             );
+            const responseMessage = await response.text();
 
             if (response.ok) {
-                toast.success("Application submitted successfully!");
+                toast.success(responseMessage);
             } else {
-                toast.error("Failed to submit application. Please try again.");
+                toast.warning(responseMessage);
             }
         } catch (error) {
-            console.error("Error applying to internship:", error);
             toast.error("Failed to submit application. Please try again.");
         }
     };

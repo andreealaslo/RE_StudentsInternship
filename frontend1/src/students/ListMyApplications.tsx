@@ -145,6 +145,13 @@ const ListMyApplications: React.FC = () => {
                     )}
                 </div>
             )}
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={() => navigate(-1)}
+            >
+                Back
+            </Button>
         </div>
     );
 };
