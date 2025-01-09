@@ -68,6 +68,7 @@ const StudentDetailsPage: React.FC = () => {
                     fontWeight: "bold",
                     textAlign: "center",
                     marginBottom: 4,
+                    marginTop: 4,
                 }}
             >
                 Student Details

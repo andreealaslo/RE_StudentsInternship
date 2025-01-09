@@ -78,6 +78,7 @@ const InternshipDetails: React.FC = () => {
                     fontWeight: "bold",
                     textAlign: "center",
                     marginBottom: 4,
+                    marginTop: 4,
                 }}
             >
                 Internship Details
