@@ -47,4 +47,12 @@ public class InternshipService {
     public List<Internship> searchInternships(String searchTerm) {
         return internshipRepository.searchInternshipsByNameOrCompany(searchTerm);
     }
+
+    public void deleteInternship(Long internshipId) {
+        internshipRepository.deleteById(internshipId);
+    }
+
+    public List<Internship> getInternshipsByCompanyId(Long companyId) {
+        return internshipRepository.findByCompanyId(companyId);
+    }
 }

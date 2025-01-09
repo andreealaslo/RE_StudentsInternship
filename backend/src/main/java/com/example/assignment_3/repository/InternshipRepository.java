@@ -12,6 +12,8 @@ public interface InternshipRepository extends JpaRepository<Internship, Long> {
             "LOWER(i.company.name) LIKE LOWER(CONCAT('%', :searchTerm, '%'))")
     List<Internship> searchInternshipsByNameOrCompany(String searchTerm);
 
-
     List<Internship> findByIsActive(boolean isActive);
+
+    void deleteById(Long id);
+    List<Internship> findByCompanyId(Long id);
 }
