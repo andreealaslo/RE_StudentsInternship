@@ -29,6 +29,7 @@ const App: React.FC = () => {
                     element={<CreateProfileCompany />}
                 />
                 <Route path="/internships" element={<ListInternships />} />
+                <Route path="/my-internships" element={<ListMyInternships />} />
                 <Route
                     path="/internships/:id"
                     element={<InternshipDetails />}
