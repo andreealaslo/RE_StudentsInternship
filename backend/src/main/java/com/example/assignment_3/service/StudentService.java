@@ -22,6 +22,10 @@ public class StudentService {
     @Autowired
     private UniversityRepository universityRepository;
 
+    public Student getStudentById(Long id) {
+        return studentRepository.findById(id).orElseThrow(() -> new RuntimeException("Student not found"));
+    }
+
     public String createProfile(StudentDTO request, Long userId) {
 
         User user = userRepository.findById(userId)
@@ -50,6 +54,10 @@ public class StudentService {
 
         studentRepository.save(student);
         return "Student profile created successfully.";
+    }
+
+    public Student getStudentByUserId(Long id) {
+        return studentRepository.findByUserId(id);
     }
 
     public List<Student> getStudentsByUniversityId(Long universityId) {

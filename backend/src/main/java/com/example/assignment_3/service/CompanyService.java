@@ -2,7 +2,6 @@ package com.example.assignment_3.service;
 
 import com.example.assignment_3.dto.CompanyDTO;
 import com.example.assignment_3.model.Company;
-import com.example.assignment_3.model.Internship;
 import com.example.assignment_3.model.User;
 import com.example.assignment_3.repository.CompanyRepository;
 import com.example.assignment_3.repository.UserRepository;

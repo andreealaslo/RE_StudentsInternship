@@ -26,62 +26,113 @@ interface Internship {
 const ListInternships: React.FC = () => {
     const [internships, setInternships] = useState<Internship[]>([]);
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [filteredInternships, setFilteredInternships] = useState<Internship[]>(internships);
+    const [filteredInternships, setFilteredInternships] =
+        useState<Internship[]>(internships);
     const [loading, setLoading] = useState<boolean>(true);
     const [userType, setUserType] = useState<string | null>(null);
     const [companyId, setCompanyId] = useState<string | null>(null);
+    const [universityId, setUniversityId] = useState<string | null>(null);
+    const [studentId, setStudentId] = useState<string | null>(null);
+
     const navigate = useNavigate();
     const location = useLocation();
-
     const storedEmail = localStorage.getItem("userEmail");
     const userEmail = storedEmail ? storedEmail : location.state?.email;
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
+        if (userEmail) {
+            // Store the email in localStorage when it is available
+            localStorage.setItem("userEmail", userEmail);
+        }
+    }, [userEmail]);
 
-                // Fetch internships
-                const internshipResponse = await fetch("http://localhost:8080/api/internships/");
-                if (internshipResponse.ok) {
-                    const internshipData = await internshipResponse.json();
-                    setInternships(internshipData);
-                    setFilteredInternships(internshipData);
-                } else {
-                    console.error("Failed to fetch internships.");
-                }
-
-                // Fetch user details
-                if (userEmail) {
-                    const userResponse = await fetch(`http://localhost:8080/api/users/email/${userEmail}`);
-                    if (userResponse.ok) {
-                        const userData = await userResponse.json();
-                        setUserType(userData.userType);
-
-                        // Fetch companyId if the user is associated with a company
-                        const companyResponse = await fetch(`http://localhost:8080/api/company/user/${userData.id}`);
-                        if (companyResponse.ok) {
-                            const companyData = await companyResponse.json();
-                            setCompanyId(companyData.id);
-
-                            // Store companyId in local storage
-                            localStorage.setItem("companyId", companyData.id);
-                        } else {
-                            console.error("Failed to fetch companyId.");
-                        }
-                    } else {
-                        console.error("Failed to fetch user details.");
-                    }
-                }
-            } catch (error) {
-                console.error("Error fetching data:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
+    useEffect(() => {
         fetchData();
     }, [userEmail]);
+
+    const fetchData = async () => {
+        try {
+            setLoading(true);
+            await fetchInternships();
+            await fetchUserData();
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchInternships = async () => {
+        const response = await fetch("http://localhost:8080/api/internships/");
+        if (response.ok) {
+            const data = await response.json();
+            setInternships(data);
+            setFilteredInternships(data);
+        } else {
+            console.error("Failed to fetch internships.");
+        }
+    };
+
+    const fetchUserData = async () => {
+        if (!userEmail) return;
+
+        const userResponse = await fetch(
+            `http://localhost:8080/api/users/email/${userEmail}`
+        );
+        if (userResponse.ok) {
+            const userData = await userResponse.json();
+            setUserType(userData.userType);
+
+            if (userData.userType === "STUDENT") {
+                await fetchStudentId(userData.id);
+            } else if (userData.userType === "COMPANY") {
+                await fetchCompanyId(userData.id);
+            } else if (userData.userType === "UNIVERSITY") {
+                await fetchUniversityId(userData.id);
+            }
+        } else {
+            console.error("Failed to fetch user details.");
+        }
+    };
+
+    const fetchCompanyId = async (userId: number) => {
+        const response = await fetch(
+            `http://localhost:8080/api/company/user/${userId}`
+        );
+        if (response.ok) {
+            const data = await response.json();
+            setCompanyId(data.id);
+            localStorage.setItem("companyId", data.id);
+        } else {
+            console.error("Failed to fetch company ID.");
+        }
+    };
+
+    const fetchUniversityId = async (userId: number) => {
+        const response = await fetch(
+            `http://localhost:8080/api/university/user/${userId}`
+        );
+        if (response.ok) {
+            const data = await response.json();
+            setUniversityId(data.id);
+            localStorage.setItem("universityId", data.id);
+        } else {
+            console.error("Failed to fetch university ID.");
+        }
+    };
+
+    const fetchStudentId = async (userId: number) => {
+        const response = await fetch(
+            `http://localhost:8080/api/student/user/${userId}`
+        );
+        if (response.ok) {
+            const data = await response.json();
+            setStudentId(data.id);
+            localStorage.setItem("studentId", data.id);
+        } else {
+            console.error("Failed to fetch student ID.");
+        }
+    };
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
@@ -90,9 +141,15 @@ const ListInternships: React.FC = () => {
     const handleSearch = () => {
         const filtered = internships.filter(
             (internship) =>
-                internship.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                internship.company.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                internship.location.toLowerCase().includes(searchQuery.toLowerCase())
+                internship.title
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                internship.company.name
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase()) ||
+                internship.location
+                    .toLowerCase()
+                    .includes(searchQuery.toLowerCase())
         );
         setFilteredInternships(filtered);
     };
@@ -102,12 +159,8 @@ const ListInternships: React.FC = () => {
     };
 
     const handleLogout = () => {
-        // Remove the email and companyId from localStorage when logging out
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("userType");
-        localStorage.removeItem("companyId");
-
-        // Redirect the user to the login page
+        // Clear localStorage and navigate to login page
+        localStorage.clear();
         navigate("/");
     };
 
@@ -119,18 +172,23 @@ const ListInternships: React.FC = () => {
         navigate("/my-internships", { state: { companyId } });
     };
 
-    useEffect(() => {
-        if (userEmail) {
-            // Store the email in localStorage when it is available
-            localStorage.setItem("userEmail", userEmail);
-        }
-    }, [userEmail]);
+    const handleMyStudents = () => {
+        navigate("/my-students", { state: { universityId } });
+    };
+
+    const handleMyApplications = () => {
+        navigate("/my-applications", { state: { studentId } });
+    };
 
     return (
         <div className="internships-container">
             <h1 className="internships-title">Internships</h1>
             {userType && (
-                <Typography variant="subtitle1" color="textSecondary" style={{ marginBottom: "20px" }}>
+                <Typography
+                    variant="subtitle1"
+                    color="textSecondary"
+                    style={{ marginBottom: "20px" }}
+                >
                     Logged in as: {userType}
                 </Typography>
             )}
@@ -147,29 +205,77 @@ const ListInternships: React.FC = () => {
                 </IconButton>
             </div>
 
-            <Box display="flex" flexDirection="column" alignItems="flex-end" style={{ marginTop: "20px" }}>
-                <Button variant="contained" color="primary" onClick={handleMyInternships}>
-                    My Internships
-                </Button>
-                <Button variant="contained" color="secondary" onClick={handleLogout} style={{ marginTop: "10px" }}>
+            <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-end"
+                style={{ marginTop: "20px" }}
+            >
+                {userType === "STUDENT" && (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleMyApplications}
+                    >
+                        My Applications
+                    </Button>
+                )}
+                {userType === "COMPANY" && (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleMyInternships}
+                    >
+                        My Internships
+                    </Button>
+                )}
+                {userType === "UNIVERSITY" && (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleMyStudents}
+                    >
+                        My Students
+                    </Button>
+                )}
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleLogout}
+                    style={{ marginTop: "10px" }}
+                >
                     Logout
                 </Button>
             </Box>
 
             {loading ? (
-                <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    minHeight="50vh"
+                >
                     <CircularProgress />
                 </Box>
             ) : (
                 <div className="internships-list">
                     {filteredInternships.length > 0 ? (
                         filteredInternships.map((internship) => (
-                            <div key={internship.id} className="internship-card">
+                            <div
+                                key={internship.id}
+                                className="internship-card"
+                            >
                                 <h3>{internship.title}</h3>
                                 <p>Company: {internship.company.name}</p>
                                 <p>Location: {internship.location}</p>
                                 <p>Duration: {internship.duration}</p>
-                                <Button onClick={() => handleViewDetails(internship.id)} variant="contained" color="primary">
+                                <Button
+                                    onClick={() =>
+                                        handleViewDetails(internship.id)
+                                    }
+                                    variant="contained"
+                                    color="primary"
+                                >
                                     View Details
                                 </Button>
                             </div>

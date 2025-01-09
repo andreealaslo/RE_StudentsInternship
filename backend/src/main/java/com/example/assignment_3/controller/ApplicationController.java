@@ -4,7 +4,6 @@ import com.example.assignment_3.dto.ApplicationDTO;
 import com.example.assignment_3.dto.MinimalStudentInfoDTO;
 import com.example.assignment_3.model.Application;
 import com.example.assignment_3.model.ApplicationStatus;
-import com.example.assignment_3.model.Student;
 import com.example.assignment_3.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

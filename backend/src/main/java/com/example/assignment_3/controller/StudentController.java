@@ -16,10 +16,26 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
+        Student student = studentService.getStudentById(id);
+        return ResponseEntity.ok(student);
+    }
+
     @PostMapping("/profile/{userId}")
     public ResponseEntity<String> createProfile(@RequestBody StudentDTO request, @PathVariable Long userId) {
         String response = studentService.createProfile(request, userId);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Student> getStudentByUserId(@PathVariable Long userId) {
+        Student student = studentService.getStudentByUserId(userId);
+        if (student != null) {
+            return ResponseEntity.ok(student);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/university/{universityId}")

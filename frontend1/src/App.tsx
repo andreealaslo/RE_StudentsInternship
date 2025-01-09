@@ -12,6 +12,10 @@ import AddInternship from "./internships/AddInternship";
 import ListMyInternships from "./internships/ListMyInternships";
 import EditInternship from "./internships/EditInternship";
 import InternshipApplications from "./internships/InternshipApplications";
+import ListMyStudents from "./universities/ListMyStudents";
+import StudentDetails from "./students/StudentDetails";
+import ListMyApplications from "./students/ListMyApplications";
+import ApplicationDetails from "./internship-applications/ApplicationDetails";
 import "./global.css";
 const App: React.FC = () => {
     return (
@@ -40,7 +44,20 @@ const App: React.FC = () => {
                 <Route path="/companies/:id" element={<CompanyDetails />} />
                 <Route path="/add-internship" element={<AddInternship />} />
                 <Route path="/edit-internship" element={<EditInternship />} />
-                <Route path="/internship-applications/:id" element={<InternshipApplications />} />
+                <Route
+                    path="/internship-applications/:id"
+                    element={<InternshipApplications />}
+                />
+                <Route path="/my-students" element={<ListMyStudents />} />
+                <Route path="/students/:id" element={<StudentDetails />} />
+                <Route
+                    path="/my-applications"
+                    element={<ListMyApplications />}
+                />
+                <Route
+                    path="/applications/:id"
+                    element={<ApplicationDetails />}
+                />
             </Routes>
         </Router>
     );

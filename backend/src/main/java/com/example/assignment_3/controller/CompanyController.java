@@ -2,7 +2,6 @@ package com.example.assignment_3.controller;
 
 import com.example.assignment_3.dto.CompanyDTO;
 import com.example.assignment_3.model.Company;
-import com.example.assignment_3.model.Internship;
 import com.example.assignment_3.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +37,4 @@ public class CompanyController {
             return ResponseEntity.notFound().build();
         }
     }
-
 }

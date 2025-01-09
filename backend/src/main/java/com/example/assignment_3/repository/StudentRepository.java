@@ -9,5 +9,6 @@ import java.util.List;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
+    Student findByUserId(Long id);
     List<Student> findByUniversityId(Long universityId); // Query to fetch students by university
 }

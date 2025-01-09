@@ -22,6 +22,16 @@ public class UniversityController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<University> getUniversityByUserId(@PathVariable Long userId) {
+        University university = universityService.getUniversityByUserId(userId);
+        if (university != null) {
+            return ResponseEntity.ok(university);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @GetMapping("/")
     public ResponseEntity<List<University>> getAllUniversities() {
         List<University> universities = universityService.getAllUniversities();
