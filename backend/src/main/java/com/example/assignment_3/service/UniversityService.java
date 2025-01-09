@@ -32,6 +32,10 @@ public class UniversityService {
         return "University profile created successfully.";
     }
 
+    public University getUniversityByUserId(Long id) {
+        return universityRepository.findByUserId(id);
+    }
+
     public List<University> getAllUniversities() {
         return universityRepository.findAll();
     }

@@ -1,6 +1,7 @@
 package com.example.assignment_3.controller;
 
 import com.example.assignment_3.dto.UniversityDTO;
+import com.example.assignment_3.model.Company;
 import com.example.assignment_3.model.University;
 import com.example.assignment_3.service.UniversityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,16 @@ public class UniversityController {
     public ResponseEntity<String> createProfile(@RequestBody UniversityDTO request, @PathVariable Long userId) {
         String response = universityService.createProfile(request, userId);
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<University> getUniversityByUserId(@PathVariable Long userId) {
+        University university = universityService.getUniversityByUserId(userId);
+        if (university != null) {
+            return ResponseEntity.ok(university);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/")
