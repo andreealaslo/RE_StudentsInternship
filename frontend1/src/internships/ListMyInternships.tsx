@@ -109,6 +109,10 @@ const ListMyInternships: React.FC = () => {
         navigate("/edit-internship", { state: { internship } });
     };
 
+    const handleViewApplications = (internshipId: number) => {
+        navigate(`/internship-applications/${internshipId}`);
+    };
+
     return (
         <div className="internships-container">
             <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -150,6 +154,16 @@ const ListMyInternships: React.FC = () => {
                                     >
                                         <DeleteIcon />
                                     </IconButton>
+                                </Box>
+                                {/* My Applications Button */}
+                                <Box display="flex" justifyContent="center" mt={2}>
+                                    <Button
+                                        variant="outlined"
+                                        color="primary"
+                                        onClick={() => handleViewApplications(internship.id)}
+                                    >
+                                        See Applications
+                                    </Button>
                                 </Box>
                             </div>
                         ))

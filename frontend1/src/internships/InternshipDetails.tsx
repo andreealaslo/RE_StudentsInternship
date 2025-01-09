@@ -49,6 +49,7 @@ const InternshipDetails: React.FC = () => {
     useEffect(() => {
         const fetchInternshipDetails = async () => {
             try {
+                console.log(id);
                 const response = await fetch(
                     `http://localhost:8080/api/internships/${id}`
                 );
