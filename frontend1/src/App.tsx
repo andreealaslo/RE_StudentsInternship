@@ -12,6 +12,7 @@ import AddInternship from "./internships/AddInternship";
 import ListMyInternships from "./internships/ListMyInternships";
 import EditInternship from "./internships/EditInternship";
 import InternshipApplications from "./internships/InternshipApplications";
+import "./global.css";
 const App: React.FC = () => {
     return (
         <Router>
