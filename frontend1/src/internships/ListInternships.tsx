@@ -32,6 +32,7 @@ const ListInternships: React.FC = () => {
     const [userType, setUserType] = useState<string | null>(null);
     const [companyId, setCompanyId] = useState<string | null>(null);
     const [universityId, setUniversityId] = useState<string | null>(null);
+    const [studentId, setStudentId] = useState<string | null>(null);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -82,7 +83,9 @@ const ListInternships: React.FC = () => {
             const userData = await userResponse.json();
             setUserType(userData.userType);
 
-            if (userData.userType === "COMPANY") {
+            if (userData.userType === "STUDENT") {
+                await fetchStudentId(userData.id);
+            } else if (userData.userType === "COMPANY") {
                 await fetchCompanyId(userData.id);
             } else if (userData.userType === "UNIVERSITY") {
                 await fetchUniversityId(userData.id);
@@ -118,6 +121,19 @@ const ListInternships: React.FC = () => {
         }
     };
 
+    const fetchStudentId = async (userId: number) => {
+        const response = await fetch(
+            `http://localhost:8080/api/student/user/${userId}`
+        );
+        if (response.ok) {
+            const data = await response.json();
+            setStudentId(data.id);
+            localStorage.setItem("studentId", data.id);
+        } else {
+            console.error("Failed to fetch student ID.");
+        }
+    };
+
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
     };
@@ -143,14 +159,8 @@ const ListInternships: React.FC = () => {
     };
 
     const handleLogout = () => {
-        // Remove the email and companyId from localStorage when logging out
-        localStorage.removeItem("userEmail");
-        localStorage.removeItem("userType");
-        localStorage.removeItem("companyId");
-        localStorage.removeItem("universityId");
-
-        // Redirect the user to the login page
-        navigate("/");
+        // Clear localStorage and navigate to login page
+        localStorage.clear();
     };
 
     const handleMyInternships = () => {
@@ -162,7 +172,11 @@ const ListInternships: React.FC = () => {
     };
 
     const handleMyStudents = () => {
-        navigate("/my-students");
+        navigate("/my-students", { state: { universityId } });
+    };
+
+    const handleMyApplications = () => {
+        navigate("/my-applications", { state: { studentId } });
     };
 
     return (
@@ -196,6 +210,15 @@ const ListInternships: React.FC = () => {
                 alignItems="flex-end"
                 style={{ marginTop: "20px" }}
             >
+                {userType === "STUDENT" && (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleMyApplications}
+                    >
+                        My Applications
+                    </Button>
+                )}
                 {userType === "COMPANY" && (
                     <Button
                         variant="contained"

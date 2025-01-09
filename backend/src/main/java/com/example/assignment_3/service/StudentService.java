@@ -57,6 +57,10 @@ public class StudentService {
         return "Student profile created successfully.";
     }
 
+    public Student getStudentByUserId(Long id) {
+        return studentRepository.findByUserId(id);
+    }
+
     public List<Student> getStudentsByUniversityId(Long universityId) {
         return studentRepository.findByUniversityId(universityId);
     }

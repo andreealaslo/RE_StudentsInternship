@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import {
-    Button,
-    CircularProgress,
-    Box,
-    IconButton,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogContentText,
-    DialogTitle,
-} from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
-import EditIcon from "@mui/icons-material/Edit";
+import { Button, CircularProgress, Box } from "@mui/material";
+import "./ListMyStudents.css";
 
 interface Student {
     id: number;
@@ -33,48 +22,67 @@ const ListMyStudents: React.FC = () => {
         location.state?.universityId || localStorage.getItem("universityId");
 
     useEffect(() => {
-        const fetchStudents = async () => {
-            if (!universityId) {
-                console.error("University ID is required to fetch students.");
-                return;
-            }
-            try {
-                setLoading(true);
-                const response = await fetch(
-                    `http://localhost:8080/api/student/university/${universityId}`
-                );
-                if (response.ok) {
-                    const data = await response.json();
-                    // Map response to required fields
-                    const mappedStudents = data.map((student: any) => ({
-                        id: student.id,
-                        fullName: student.fullName,
-                        location: student.location,
-                        degree: student.degree,
-                        skills: student.skills,
-                        expectedGraduationDate: student.expectedGraduationDate,
-                    }));
-                    setStudents(mappedStudents);
-                } else {
-                    console.error("Failed to fetch students.");
-                }
-            } catch (error) {
-                console.error("Error fetching students:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchStudents();
+        if (universityId) {
+            fetchStudents(universityId);
+        } else {
+            console.error("University ID is required to fetch students.");
+        }
     }, [universityId]);
+
+    const fetchStudents = async (universityId: string) => {
+        try {
+            setLoading(true);
+            const response = await fetch(
+                `http://localhost:8080/api/student/university/${universityId}`
+            );
+            if (response.ok) {
+                const data = await response.json();
+                const mappedStudents = data.map((student: any) => ({
+                    id: student.id,
+                    fullName: student.fullName,
+                    location: student.location,
+                    degree: student.degree,
+                    skills: student.skills,
+                    expectedGraduationDate: student.expectedGraduationDate,
+                }));
+                setStudents(mappedStudents);
+            } else {
+                console.error("Failed to fetch students.");
+            }
+        } catch (error) {
+            console.error("Error fetching students:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     const handleViewDetails = (studentId: number) => {
         navigate(`/students/${studentId}`);
     };
 
+    const handleLogout = () => {
+        // Clear localStorage and navigate to login page
+        localStorage.clear();
+        navigate("/");
+    };
+
     return (
-        <div className="internships-container">
+        <div className="students-container">
             <h1>My Students</h1>
+            <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="flex-end"
+                style={{ marginBottom: "20px" }}
+            >
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={handleLogout}
+                >
+                    Logout
+                </Button>
+            </Box>
             {loading ? (
                 <Box
                     display="flex"
@@ -85,10 +93,10 @@ const ListMyStudents: React.FC = () => {
                     <CircularProgress />
                 </Box>
             ) : (
-                <div className="internships-list">
+                <div className="students-list">
                     {students.length > 0 ? (
                         students.map((student) => (
-                            <div key={student.id} className="internship-card">
+                            <div key={student.id} className="student-card">
                                 <h3>{student.fullName}</h3>
                                 <p>Location: {student.location}</p>
                                 <p>Degree: {student.degree}</p>
