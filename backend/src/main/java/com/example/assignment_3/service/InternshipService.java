@@ -55,4 +55,15 @@ public class InternshipService {
     public List<Internship> getInternshipsByCompanyId(Long companyId) {
         return internshipRepository.findByCompanyId(companyId);
     }
+
+    public String updateInternship(Long id, InternshipDTO internshipDTO) {
+        Internship internship = getInternshipById(id);
+        internship.setTitle(internshipDTO.getTitle());
+        internship.setDescription(internshipDTO.getDescription());
+        internship.setLocation(internshipDTO.getLocation());
+        internship.setDuration(internshipDTO.getDuration());
+        internship.setRequirements(internshipDTO.getRequirements());
+        internshipRepository.save(internship);
+        return "Internship updated successfully.";
+    }
 }

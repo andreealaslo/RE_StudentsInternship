@@ -10,6 +10,7 @@ import InternshipDetails from "./internships/InternshipDetails";
 import CompanyDetails from "./companies/CompanyDetails";
 import AddInternship from "./internships/AddInternship";
 import ListMyInternships from "./internships/ListMyInternships";
+import EditInternship from "./internships/EditInternship";
 const App: React.FC = () => {
     return (
         <Router>
@@ -36,6 +37,7 @@ const App: React.FC = () => {
                 />
                 <Route path="/companies/:id" element={<CompanyDetails />} />
                 <Route path="/add-internship" element={<AddInternship />} />
+                <Route path="/edit-internship" element={<EditInternship />} />
             </Routes>
         </Router>
     );

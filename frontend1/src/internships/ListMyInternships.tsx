@@ -13,12 +13,14 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface Internship {
     id: number;
     title: string;
     location: string;
     duration: string;
+    description: string;
 }
 
 const ListMyInternships: React.FC = () => {
@@ -103,6 +105,10 @@ const ListMyInternships: React.FC = () => {
         navigate("/add-internship", { state: { companyId } });
     };
 
+    const handleEditClick = (internship: Internship) => {
+        navigate("/edit-internship", { state: { internship } });
+    };
+
     return (
         <div className="internships-container">
             <Box display="flex" alignItems="center" justifyContent="space-between">
@@ -123,6 +129,7 @@ const ListMyInternships: React.FC = () => {
                                 <h3>{internship.title}</h3>
                                 <p>Location: {internship.location}</p>
                                 <p>Duration: {internship.duration}</p>
+                                <p>Description: {internship.description}</p>
                                 <Box display="flex" alignItems="center" gap={1}>
                                     <Button
                                         variant="contained"
@@ -131,6 +138,12 @@ const ListMyInternships: React.FC = () => {
                                     >
                                         See Details
                                     </Button>
+                                    <IconButton
+                                        color="primary"
+                                        onClick={() => handleEditClick(internship)}
+                                    >
+                                        <EditIcon />
+                                    </IconButton>
                                     <IconButton
                                         color="error"
                                         onClick={() => handleDeleteClick(internship)}
