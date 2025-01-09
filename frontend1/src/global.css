@@ -1,0 +1,7 @@
+body {
+    color: black;
+    margin: 0;
+    padding: 0;
+    text-align: left; /* Ensures text alignment is left */
+    display: block;  /* Avoid any inherited flex/center behavior */
+}
