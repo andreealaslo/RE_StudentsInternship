@@ -10,6 +10,8 @@ import {
     Button,
     Link,
 } from "@mui/material";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Make sure to import the Toastify styles
 
 interface User {
     id: number;
@@ -69,6 +71,45 @@ const InternshipDetails: React.FC = () => {
 
         fetchInternshipDetails();
     }, [id]);
+
+    const handleApply = async () => {
+        const studentId = localStorage.getItem("studentId");
+
+        if (!studentId) {
+            console.error("No student ID found in localStorage");
+            return;
+        }
+
+        const applicationData = {
+            id: 0,
+            studentId: Number(studentId),
+            internshipId: internship?.id ?? 0,
+            applicationDate: new Date().toISOString(),
+            status: "PENDING",
+        };
+
+        try {
+            const response = await fetch(
+                "http://localhost:8080/api/applications/apply",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(applicationData),
+                }
+            );
+
+            if (response.ok) {
+                toast.success("Application submitted successfully!");
+            } else {
+                toast.error("Failed to submit application. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error applying to internship:", error);
+            toast.error("Failed to submit application. Please try again.");
+        }
+    };
 
     return (
         <div>
@@ -194,7 +235,7 @@ const InternshipDetails: React.FC = () => {
                                 sx={{
                                     marginTop: 3,
                                     display: "flex",
-                                    justifyContent: "center",
+                                    justifyContent: "space-between",
                                 }}
                             >
                                 <Button
@@ -204,6 +245,13 @@ const InternshipDetails: React.FC = () => {
                                 >
                                     Back
                                 </Button>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={handleApply}
+                                >
+                                    Apply
+                                </Button>
                             </Box>
                         </CardContent>
                     </Card>
@@ -211,6 +259,12 @@ const InternshipDetails: React.FC = () => {
             ) : (
                 <Typography>No details found for this internship.</Typography>
             )}
+
+            <ToastContainer
+                position="bottom-center"
+                autoClose={4000}
+                aria-label={undefined}
+            />
         </div>
     );
 };
