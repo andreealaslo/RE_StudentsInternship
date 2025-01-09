@@ -16,7 +16,7 @@ import ListMyStudents from "./universities/ListMyStudents";
 import StudentDetails from "./students/StudentDetails";
 import ListMyApplications from "./students/ListMyApplications";
 import ApplicationDetails from "./internship-applications/ApplicationDetails";
-
+import "./global.css";
 const App: React.FC = () => {
     return (
         <Router>
