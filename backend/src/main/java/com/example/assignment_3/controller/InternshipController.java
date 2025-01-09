@@ -50,7 +50,7 @@ public class InternshipController {
         internshipService.deleteInternship(id);
     }
 
-    @GetMapping("/company/{companyId")
+    @GetMapping("/company/{companyId}")
     public ResponseEntity<List<Internship>> getInternshipsByCompany(@PathVariable Long companyId) {
         List<Internship> internships = internshipService.getInternshipsByCompanyId(companyId);
         return ResponseEntity.ok(internships);
