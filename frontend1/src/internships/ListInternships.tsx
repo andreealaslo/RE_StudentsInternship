@@ -161,6 +161,7 @@ const ListInternships: React.FC = () => {
     const handleLogout = () => {
         // Clear localStorage and navigate to login page
         localStorage.clear();
+        navigate("/");
     };
 
     const handleMyInternships = () => {
