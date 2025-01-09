@@ -1,13 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Button, CircularProgress, Box, IconButton, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
+import {
+    Button,
+    CircularProgress,
+    Box,
+    IconButton,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import AddIcon from "@mui/icons-material/Add";
+import EditIcon from "@mui/icons-material/Edit";
 
 interface Internship {
     id: number;
     title: string;
     location: string;
     duration: string;
+    description: string;
 }
 
 const ListMyInternships: React.FC = () => {
@@ -28,7 +41,9 @@ const ListMyInternships: React.FC = () => {
             }
             try {
                 setLoading(true);
-                const response = await fetch(`http://localhost:8080/api/internships/company/${companyId}`);
+                const response = await fetch(
+                    `http://localhost:8080/api/internships/company/${companyId}`
+                );
                 if (response.ok) {
                     const data = await response.json();
                     setInternships(data);
@@ -58,9 +73,12 @@ const ListMyInternships: React.FC = () => {
         if (!internshipToDelete) return;
 
         try {
-            const response = await fetch(`http://localhost:8080/api/internships/${internshipToDelete.id}`, {
-                method: "DELETE",
-            });
+            const response = await fetch(
+                `http://localhost:8080/api/internships/${internshipToDelete.id}`,
+                {
+                    method: "DELETE",
+                }
+            );
             if (response.ok) {
                 setInternships((prev) => prev.filter((i) => i.id !== internshipToDelete.id));
             } else {
@@ -79,9 +97,26 @@ const ListMyInternships: React.FC = () => {
         setInternshipToDelete(null);
     };
 
+    const handleAddInternship = () => {
+        if (!companyId) {
+            alert("Please wait while your company data is being fetched.");
+            return;
+        }
+        navigate("/add-internship", { state: { companyId } });
+    };
+
+    const handleEditClick = (internship: Internship) => {
+        navigate("/edit-internship", { state: { internship } });
+    };
+
     return (
         <div className="internships-container">
-            <h1>My Internships</h1>
+            <Box display="flex" alignItems="center" justifyContent="space-between">
+                <h1>My Internships</h1>
+                <IconButton color="primary" onClick={handleAddInternship}>
+                    <AddIcon fontSize="large" />
+                </IconButton>
+            </Box>
             {loading ? (
                 <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
                     <CircularProgress />
@@ -94,6 +129,7 @@ const ListMyInternships: React.FC = () => {
                                 <h3>{internship.title}</h3>
                                 <p>Location: {internship.location}</p>
                                 <p>Duration: {internship.duration}</p>
+                                <p>Description: {internship.description}</p>
                                 <Box display="flex" alignItems="center" gap={1}>
                                     <Button
                                         variant="contained"
@@ -102,6 +138,12 @@ const ListMyInternships: React.FC = () => {
                                     >
                                         See Details
                                     </Button>
+                                    <IconButton
+                                        color="primary"
+                                        onClick={() => handleEditClick(internship)}
+                                    >
+                                        <EditIcon />
+                                    </IconButton>
                                     <IconButton
                                         color="error"
                                         onClick={() => handleDeleteClick(internship)}

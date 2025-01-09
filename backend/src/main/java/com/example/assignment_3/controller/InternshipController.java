@@ -55,4 +55,10 @@ public class InternshipController {
         List<Internship> internships = internshipService.getInternshipsByCompanyId(companyId);
         return ResponseEntity.ok(internships);
     }
+
+    @PutMapping("/edit/internship/{id}")
+    public ResponseEntity<String> editInternship(@PathVariable Long id, @RequestBody InternshipDTO internshipDTO) {
+        String response = internshipService.updateInternship(id, internshipDTO);
+        return ResponseEntity.ok(response);
+    }
 }

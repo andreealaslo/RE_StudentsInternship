@@ -8,7 +8,7 @@ import {
     CircularProgress,
     Box,
 } from "@mui/material";
-import { Search, Add } from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import "./ListInternships.css";
 
 interface Company {
@@ -101,14 +101,6 @@ const ListInternships: React.FC = () => {
         navigate(`/internships/${internshipId}`);
     };
 
-    const handleAddInternship = () => {
-        if (!companyId) {
-            alert("Please wait while your company data is being fetched.");
-            return;
-        }
-        navigate("/add-internship", { state: { companyId } });
-    };
-
     const handleLogout = () => {
         // Remove the email and companyId from localStorage when logging out
         localStorage.removeItem("userEmail");
@@ -153,11 +145,6 @@ const ListInternships: React.FC = () => {
                 <IconButton onClick={handleSearch} color="primary">
                     <Search />
                 </IconButton>
-                {userType === "COMPANY" && (
-                    <IconButton onClick={handleAddInternship} color="secondary">
-                        <Add />
-                    </IconButton>
-                )}
             </div>
 
             <Box display="flex" flexDirection="column" alignItems="flex-end" style={{ marginTop: "20px" }}>
