@@ -44,4 +44,15 @@ public class InternshipController {
         List<Internship> internships = internshipService.searchInternships(searchTerm);
         return ResponseEntity.ok(internships);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteInternship(@PathVariable Long id) {
+        internshipService.deleteInternship(id);
+    }
+
+    @GetMapping("/company/{companyId")
+    public ResponseEntity<List<Internship>> getInternshipsByCompany(@PathVariable Long companyId) {
+        List<Internship> internships = internshipService.getInternshipsByCompanyId(companyId);
+        return ResponseEntity.ok(internships);
+    }
 }
