@@ -2,13 +2,14 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
     Box,
-    Typography,
-    Button,
     CircularProgress,
-    Link,
+    Card,
+    CardContent,
+    Typography,
     Divider,
+    Button,
+    Link,
 } from "@mui/material";
-import "./InternshipDetails.css";
 
 interface User {
     id: number;
@@ -49,7 +50,7 @@ const InternshipDetails: React.FC = () => {
     useEffect(() => {
         const fetchInternshipDetails = async () => {
             try {
-                console.log(id);
+                setLoading(true);
                 const response = await fetch(
                     `http://localhost:8080/api/internships/${id}`
                 );
@@ -69,100 +70,147 @@ const InternshipDetails: React.FC = () => {
         fetchInternshipDetails();
     }, [id]);
 
-    if (loading) {
-        return (
-            <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                minHeight="100vh"
-            >
-                <CircularProgress />
-            </Box>
-        );
-    }
-
-    if (!internship) {
-        return (
-            <Box textAlign="center" padding={4}>
-                <Typography variant="h5" color="error">
-                    Internship not found.
-                </Typography>
-                <Button variant="contained" onClick={() => navigate(-1)}>
-                    Go Back
-                </Button>
-            </Box>
-        );
-    }
-
     return (
-        <Box className="internship-details-container">
-            <h1 className="internship-details-title">{internship.title}</h1>
-            <Box marginTop={2}>
-                <Typography variant="h6">
-                    <strong>Details</strong>
-                </Typography>
-                <Typography variant="body1" className="detail-item">
-                    Location: {internship.location}
-                </Typography>
-                <Typography variant="body1" className="detail-item">
-                    Duration: {internship.duration}
-                </Typography>
-            </Box>
+        <div>
+            <Typography
+                variant="h3"
+                sx={{
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    marginBottom: 4,
+                }}
+            >
+                Internship Details
+            </Typography>
 
-            <Divider className="divider" />
-
-            <Box marginTop={2}>
-                <Typography variant="h6">
-                    <strong>Description</strong>
-                </Typography>
-                <Typography variant="body1" className="detail-item">
-                    {internship.description}
-                </Typography>
-            </Box>
-
-            <Divider className="divider" />
-
-            <Box marginTop={2}>
-                <Typography variant="h6">
-                    <strong>Requirements</strong>
-                </Typography>
-                <Typography variant="body1" className="detail-item">
-                    {internship.requirements}
-                </Typography>
-            </Box>
-
-            <Divider className="divider" />
-
-            <Box marginTop={2}>
-                <Typography variant="h6">
-                    <strong>Company</strong>
-                </Typography>
-                <Typography variant="body1">
-                    <Link
-                        onClick={() =>
-                            navigate(`/companies/${internship.company.id}`, {
-                                state: { company: internship.company },
-                            })
-                        }
-                        color="primary"
-                        style={{ cursor: "pointer", fontWeight: "bold" }}
-                    >
-                        {internship.company.name}
-                    </Link>
-                </Typography>
-            </Box>
-
-            <Box marginTop={4}>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => navigate(-1)}
+            {loading ? (
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    minHeight="50vh"
                 >
-                    Go Back
-                </Button>
-            </Box>
-        </Box>
+                    <CircularProgress />
+                </Box>
+            ) : internship ? (
+                <Box sx={{ display: "flex", justifyContent: "center" }}>
+                    <Card
+                        sx={{
+                            width: "600px",
+                            padding: 3,
+                            boxShadow: 3,
+                            borderRadius: 2,
+                        }}
+                    >
+                        <CardContent>
+                            <Typography
+                                variant="h6"
+                                color="primary"
+                                gutterBottom
+                            >
+                                General Information
+                            </Typography>
+                            <Divider />
+                            <Box sx={{ marginTop: 2 }}>
+                                <Typography variant="body1">
+                                    <strong>Title:</strong> {internship.title}
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Location:</strong>{" "}
+                                    {internship.location}
+                                </Typography>
+                                <Typography variant="body1">
+                                    <strong>Duration:</strong>{" "}
+                                    {internship.duration}
+                                </Typography>
+                            </Box>
+
+                            <Typography
+                                variant="h6"
+                                color="primary"
+                                sx={{ marginTop: 3 }}
+                                gutterBottom
+                            >
+                                Description
+                            </Typography>
+                            <Divider />
+                            <Box sx={{ marginTop: 2 }}>
+                                <Typography variant="body1">
+                                    {internship.description}
+                                </Typography>
+                            </Box>
+
+                            <Typography
+                                variant="h6"
+                                color="primary"
+                                sx={{ marginTop: 3 }}
+                                gutterBottom
+                            >
+                                Requirements
+                            </Typography>
+                            <Divider />
+                            <Box sx={{ marginTop: 2 }}>
+                                <Typography variant="body1">
+                                    {internship.requirements}
+                                </Typography>
+                            </Box>
+
+                            <Typography
+                                variant="h6"
+                                color="primary"
+                                sx={{ marginTop: 3 }}
+                                gutterBottom
+                            >
+                                Company
+                            </Typography>
+                            <Divider />
+                            <Box sx={{ marginTop: 2 }}>
+                                <Typography variant="body1">
+                                    <Link
+                                        onClick={() =>
+                                            navigate(
+                                                `/companies/${internship.company.id}`,
+                                                {
+                                                    state: {
+                                                        company:
+                                                            internship.company,
+                                                    },
+                                                }
+                                            )
+                                        }
+                                        color="primary"
+                                        style={{
+                                            cursor: "pointer",
+                                            fontWeight: "bold",
+                                        }}
+                                    >
+                                        {internship.company.name}
+                                    </Link>
+                                </Typography>
+                            </Box>
+
+                            <Box
+                                sx={{
+                                    marginTop: 3,
+                                    display: "flex",
+                                    justifyContent: "center",
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => navigate(-1)}
+                                >
+                                    Back
+                                </Button>
+                            </Box>
+                        </CardContent>
+                    </Card>
+                </Box>
+            ) : (
+                <Typography>No details found for this internship.</Typography>
+            )}
+        </div>
     );
 };
 
