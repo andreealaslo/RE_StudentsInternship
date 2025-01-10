@@ -137,6 +137,9 @@ const InternshipDetails: React.FC = () => {
         }
     };
 
+    const studentId = localStorage.getItem("studentId");
+
+
     return (
         <div>
             <Typography
@@ -271,14 +274,25 @@ const InternshipDetails: React.FC = () => {
                                 >
                                     Back
                                 </Button>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={handleApply}
-                                    disabled={hasApplied}
-                                >
-                                    {hasApplied ? "Already Applied" : "Apply"}
-                                </Button>
+                                {studentId && !hasApplied && (
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={handleApply}
+                                    >
+                                        Apply
+                                    </Button>
+                                )}
+                                {studentId && hasApplied && (
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        disabled
+                                    >
+                                        Already Applied
+                                    </Button>
+                                )}
+                                
                             </Box>
                         </CardContent>
                     </Card>
