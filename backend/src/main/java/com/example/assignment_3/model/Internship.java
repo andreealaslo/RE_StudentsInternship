@@ -33,4 +33,7 @@ public class Internship {
 
     @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT TRUE")
     private boolean isActive = true;
+
+    @Column(nullable = false)
+    private int remainingSlots;
 }

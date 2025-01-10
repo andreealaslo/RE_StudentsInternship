@@ -10,4 +10,5 @@ public class InternshipDTO {
     private String location;
     private String duration;
     private String requirements;
+    private int remainingSlots;
 }
