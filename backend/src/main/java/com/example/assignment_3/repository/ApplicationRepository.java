@@ -17,5 +17,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Long> 
     List<Application> findByInternshipId(Long internshipId);
 
     //Check if a student has already applied for a specific internship
-    boolean existsByStudentAndInternshipId(Student student, Long internshipId);
+    boolean existsByStudentIdAndInternshipId(Long studentId, Long internshipId);
 }

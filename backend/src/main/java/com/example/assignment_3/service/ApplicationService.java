@@ -1,6 +1,7 @@
 package com.example.assignment_3.service;
 
 import com.example.assignment_3.dto.ApplicationDTO;
+import com.example.assignment_3.dto.MinimalStudentInfoDTO;
 import com.example.assignment_3.model.*;
 import com.example.assignment_3.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class ApplicationService {
         Internship internship = internshipRepository.findById(applicationDTO.getInternshipId())
                 .orElseThrow(() -> new RuntimeException("Internship not found"));
 
-        if (applicationRepository.existsByStudentAndInternshipId(student, internship.getId())) {
+        if (applicationRepository.existsByStudentIdAndInternshipId(student.getId(), internship.getId())) {
             return "You have already applied for this internship.";
         }
 
@@ -113,4 +114,10 @@ public class ApplicationService {
             throw new RuntimeException("Invalid status update.");
         }
     }
+
+    public boolean hasAlreadyApplied(Long studentId, Long internshipId) {
+        return applicationRepository.existsByStudentIdAndInternshipId(studentId, internshipId);
+    }
+
+
 }

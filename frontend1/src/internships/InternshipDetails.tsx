@@ -46,6 +46,7 @@ interface Internship {
 const InternshipDetails: React.FC = () => {
     const [internship, setInternship] = useState<Internship | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [hasApplied, setHasApplied] = useState<boolean>(false);
     const navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
 
@@ -69,8 +70,32 @@ const InternshipDetails: React.FC = () => {
             }
         };
 
+        const checkIfAlreadyApplied = async () => {
+            const studentId = localStorage.getItem("studentId");
+
+            if (!studentId) {
+                console.error("No student ID found in localStorage");
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `http://localhost:8080/api/applications/has-applied/${studentId}/${id}`
+                );
+                if (response.ok) {
+                    const data = await response.json();
+                    setHasApplied(data); // Assume the API returns a boolean
+                }
+            } catch (error) {
+                console.error("Error checking if student has applied:", error);
+            }
+        };
+
         fetchInternshipDetails();
+        checkIfAlreadyApplied();
     }, [id]);
+
+    
 
     const handleApply = async () => {
         const studentId = localStorage.getItem("studentId");
@@ -103,6 +128,7 @@ const InternshipDetails: React.FC = () => {
 
             if (response.ok) {
                 toast.success(responseMessage);
+                setHasApplied(true);
             } else {
                 toast.warning(responseMessage);
             }
@@ -110,6 +136,9 @@ const InternshipDetails: React.FC = () => {
             toast.error("Failed to submit application. Please try again.");
         }
     };
+
+    const studentId = localStorage.getItem("studentId");
+
 
     return (
         <div>
@@ -245,13 +274,25 @@ const InternshipDetails: React.FC = () => {
                                 >
                                     Back
                                 </Button>
-                                <Button
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={handleApply}
-                                >
-                                    Apply
-                                </Button>
+                                {studentId && !hasApplied && (
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={handleApply}
+                                    >
+                                        Apply
+                                    </Button>
+                                )}
+                                {studentId && hasApplied && (
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        disabled
+                                    >
+                                        Already Applied
+                                    </Button>
+                                )}
+                                
                             </Box>
                         </CardContent>
                     </Card>

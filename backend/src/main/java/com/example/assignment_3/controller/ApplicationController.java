@@ -53,4 +53,9 @@ public class ApplicationController {
         String response = applicationService.updateApplicationStatus(applicationId, status);
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/has-applied/{studentId}/{internshipId}")
+    public boolean hasAlreadyApplied(@PathVariable Long studentId, @PathVariable Long internshipId) {
+        return applicationService.hasAlreadyApplied(studentId, internshipId);
+    }
 }
