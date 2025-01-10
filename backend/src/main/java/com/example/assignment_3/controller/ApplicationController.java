@@ -53,19 +53,4 @@ public class ApplicationController {
         String response = applicationService.updateApplicationStatus(applicationId, status);
         return ResponseEntity.ok(response);
     }
-
-    //get only THE ACCEPTED candidates for an internship -> a list with students
-    @GetMapping("/internship/{internshipId}/accepted-candidates")
-    public ResponseEntity<List<MinimalStudentInfoDTO>> getAcceptedCandidates(@PathVariable Long internshipId) {
-        List<MinimalStudentInfoDTO> acceptedCandidates = applicationService.getAcceptedCandidatesForRole(internshipId);
-        return ResponseEntity.ok(acceptedCandidates);
-    }
-
-    @PutMapping("/internship/{internshipId}/select/{applicationId}")
-    public ResponseEntity<MinimalStudentInfoDTO> selectCandidateForInternship(
-            @PathVariable Long internshipId,
-            @PathVariable Long applicationId) {
-        MinimalStudentInfoDTO selectedCandidate = applicationService.selectCandidateForInternship(internshipId, applicationId);
-        return ResponseEntity.ok(selectedCandidate);
-    }
 }
