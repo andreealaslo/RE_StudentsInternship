@@ -8,7 +8,11 @@ import {
     Typography,
     Divider,
     Button,
+    List,
+    ListItem,
+    ListItemText,
 } from "@mui/material";
+import downloadIcon from '../assets/download.svg';
 
 interface StudentDetails {
     id: number;
@@ -27,8 +31,19 @@ interface StudentDetails {
     hobbies: string[];
 }
 
+interface Document {
+    id: number;
+    fileName: string;
+    fileType: string;
+    fileSize: number;
+    filePath: string;
+    studentId?: number; // Optional, in case documents are associated with students
+    universityId?: number; // Optional, in case documents are associated with universities
+}
+
 const StudentDetailsPage: React.FC = () => {
     const [student, setStudent] = useState<StudentDetails | null>(null);
+    const [documents, setDocuments] = useState<Document[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
@@ -57,8 +72,36 @@ const StudentDetailsPage: React.FC = () => {
             }
         };
 
+        const fetchStudentDocuments = async () => {
+            if (!id) return;
+            try {
+                const response = await fetch(
+                    `http://localhost:8080/api/files/student/${id}`
+                );
+                if (response.ok) {
+                    const data = await response.json();
+                    setDocuments(data);
+                } else {
+                    console.error("Failed to fetch student documents.");
+                }
+            } catch (error) {
+                console.error("Error fetching student documents:", error);
+            }
+        };
+
         fetchStudentDetails();
+        fetchStudentDocuments();
     }, [id]);
+
+    const handleDownload = (filePath: string) => {
+        const fileName = filePath.split("/").pop();
+        if (!fileName) return;
+
+        const link = document.createElement("a");
+        link.href = `http://localhost:8080/api/files/download/${fileName}`;
+        link.download = fileName;
+        link.click();
+    };
 
     return (
         <div>
@@ -200,6 +243,44 @@ const StudentDetailsPage: React.FC = () => {
                                 <Typography variant="body1">
                                     {student.hobbies.join(", ")}
                                 </Typography>
+                            </Box>
+
+                            <Typography
+                                variant="h6"
+                                color="primary"
+                                sx={{ marginTop: 3 }}
+                                gutterBottom
+                            >
+                                Uploaded Documents
+                            </Typography>
+                            <Divider />
+                            <Box sx={{ marginTop: 2 }}>
+                                {documents.length > 0 ? (
+                                    <List>
+                                        {documents.map((doc) => (
+                                            <ListItem
+                                                key={doc.id}
+                                                sx={{
+                                                    display: "flex",
+                                                    justifyContent:
+                                                        "space-between",
+                                                }}
+                                            >
+                                                <ListItemText
+                                                    primary={doc.fileName}
+                                                />
+                                                <img
+                                                src={downloadIcon}
+                                                alt="Download"
+                                                onClick={() => handleDownload(doc.fileName)}
+                                                style={{ cursor: "pointer", width: "24px", height: "24px" }}
+                                            />
+                                            </ListItem>
+                                        ))}
+                                    </List>
+                                ) : (
+                                    <Typography>No documents uploaded.</Typography>
+                                )}
                             </Box>
 
                             <Box

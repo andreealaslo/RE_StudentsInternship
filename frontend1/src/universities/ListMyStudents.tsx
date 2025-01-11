@@ -67,22 +67,19 @@ const ListMyStudents: React.FC = () => {
     };
 
     return (
-        <div className="students-container">
+        <div className="page-container">
+            <div className="back-logout-buttons-container">
+                        <Box display="flex" justifyContent="space-between" margin="3px">
+                        <Button variant="contained" color="primary" onClick={() => navigate(-1)}>
+                                    Back
+                        </Button>
+                        <Button variant="contained" color="secondary" onClick={handleLogout}>
+                                Logout
+                            </Button>
+                        </Box>
+            </div>
+            <div className="students-container">
             <h1>My Students</h1>
-            <Box
-                display="flex"
-                flexDirection="column"
-                alignItems="flex-end"
-                style={{ marginBottom: "20px" }}
-            >
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleLogout}
-                >
-                    Logout
-                </Button>
-            </Box>
             {loading ? (
                 <Box
                     display="flex"
@@ -123,13 +120,9 @@ const ListMyStudents: React.FC = () => {
                     )}
                 </div>
             )}
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={() => navigate(-1)}
-            >
-                Back
-            </Button>
+            </div>
+
+            
         </div>
     );
 };

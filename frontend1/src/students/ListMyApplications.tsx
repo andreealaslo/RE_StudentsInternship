@@ -75,7 +75,18 @@ const ListMyApplications: React.FC = () => {
     };
 
     return (
-        <div className="applications-container">
+        <div className="page-container">
+            <div className="back-logout-buttons-container">
+                                    <Box display="flex" justifyContent="space-between" margin="3px">
+                                    <Button variant="contained" color="primary" onClick={() => navigate(-1)}>
+                                                Back
+                                    </Button>
+                                    <Button variant="contained" color="secondary" onClick={handleLogout}>
+                                            Logout
+                                        </Button>
+                                    </Box>
+            </div>
+            <div className="applications-container">
             <h1>My Applications</h1>
             <Box
                 display="flex"
@@ -83,13 +94,6 @@ const ListMyApplications: React.FC = () => {
                 alignItems="flex-end"
                 style={{ marginBottom: "20px" }}
             >
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleLogout}
-                >
-                    Logout
-                </Button>
             </Box>
 
             {loading ? (
@@ -145,13 +149,8 @@ const ListMyApplications: React.FC = () => {
                     )}
                 </div>
             )}
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={() => navigate(-1)}
-            >
-                Back
-            </Button>
+            </div>
+            
         </div>
     );
 };

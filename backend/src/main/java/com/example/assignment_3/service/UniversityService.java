@@ -39,4 +39,9 @@ public class UniversityService {
     public List<University> getAllUniversities() {
         return universityRepository.findAll();
     }
+
+    public University getUniversityByStudentId(Long studentId) {
+        return universityRepository.findByStudentId(studentId);
+    }
+
 }

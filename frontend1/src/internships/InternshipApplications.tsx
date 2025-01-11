@@ -84,9 +84,26 @@ const InternshipApplications: React.FC = () => {
         }
     };
 
+    const handleLogout = () => {
+        // Clear localStorage and navigate to login page
+        localStorage.clear();
+        navigate("/");
+    };
+
     return (
         <div>
-            <Typography variant="h4" gutterBottom>
+            <div className="back-logout-buttons-container">
+                <Box display="flex" justifyContent="space-between" margin="3px">
+                <Button variant="contained" color="primary" onClick={() => navigate(-1)}>
+                            Back
+                </Button>
+                <Button variant="contained" color="secondary" onClick={handleLogout}>
+                        Logout
+                    </Button>
+                </Box>
+             </div>
+             <div className="applications-container">
+             <Typography variant="h4" gutterBottom>
                 Applications for Internship
             </Typography>
 
@@ -190,12 +207,10 @@ const InternshipApplications: React.FC = () => {
                         <Typography>No applications found for this internship.</Typography>
                     )}
 
-                    {/* Back Button moved below */}
-                    <Button variant="contained" color="primary" onClick={() => navigate(-1)} sx={{ marginTop: 3 }}>
-                        Back
-                    </Button>
                 </div>
             )}
+             </div>
+            
         </div>
     );
 };

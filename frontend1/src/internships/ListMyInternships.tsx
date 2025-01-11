@@ -113,11 +113,34 @@ const ListMyInternships: React.FC = () => {
         navigate(`/internship-applications/${internshipId}`);
     };
 
+    const handleLogout = () => {
+        // Clear localStorage and navigate to login page
+        localStorage.clear();
+        navigate("/");
+    };
+
     return (
-        <div className="internships-container">
+        <div className="page-container">
+            <div className="back-logout-buttons-container">
+                <Box display="flex" justifyContent="space-between" margin="3px">
+                <Button variant="contained" color="primary" onClick={() => navigate(-1)}>
+                            Back
+                </Button>
+                <Button variant="contained" color="secondary" onClick={handleLogout}>
+                        Logout
+                    </Button>
+                </Box>
+            </div>
+            <div className="internships-container">
+            <h1>My Internships</h1>
             <Box display="flex" alignItems="center" justifyContent="space-between">
-                <h1>My Internships</h1>
-                <IconButton color="primary" onClick={handleAddInternship}>
+                <IconButton color="default" onClick={handleAddInternship}
+                sx={{
+                    backgroundColor: "#f0d1e1", // Set the background color here
+                    '&:hover': {
+                        backgroundColor: "#ebb2cf", // Set the hover background color
+                    },
+                }}>
                     <AddIcon fontSize="large" />
                 </IconButton>
             </Box>
@@ -172,9 +195,6 @@ const ListMyInternships: React.FC = () => {
                     )}
                 </div>
             )}
-            <Button variant="contained" color="primary" onClick={() => navigate(-1)}>
-                Back
-            </Button>
 
             {/* Delete Confirmation Dialog */}
             <Dialog
@@ -198,6 +218,8 @@ const ListMyInternships: React.FC = () => {
                     </Button>
                 </DialogActions>
             </Dialog>
+            </div>
+            
         </div>
     );
 };

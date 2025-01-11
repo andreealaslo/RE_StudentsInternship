@@ -1,0 +1,295 @@
+INSERT INTO users (name, email, password, user_type)
+VALUES
+    ('uni1', 'uni1', 'uni1', 'UNIVERSITY'),
+    ('uni2', 'uni2', 'uni2', 'UNIVERSITY'),
+    ('uni3', 'uni3', 'uni3', 'UNIVERSITY'),
+    ('uni4', 'uni4', 'uni4', 'UNIVERSITY'),
+    ('uni5', 'uni5', 'uni5', 'UNIVERSITY'),
+    ('uni6', 'uni6', 'uni6', 'UNIVERSITY'),
+    ('uni7', 'uni7', 'uni7', 'UNIVERSITY'),
+    ('uni8', 'uni8', 'uni8', 'UNIVERSITY'),
+    ('uni9', 'uni9', 'uni9', 'UNIVERSITY'),
+    ('uni10', 'uni10', 'uni10', 'UNIVERSITY'),
+    ('uni11', 'uni11', 'uni11', 'UNIVERSITY'),
+    ('uni12', 'uni12', 'uni12', 'UNIVERSITY'),
+    ('uni13', 'uni13', 'uni13', 'UNIVERSITY'),
+    ('uni14', 'uni14', 'uni14', 'UNIVERSITY'),
+    ('uni15', 'uni15', 'uni15', 'UNIVERSITY'),
+    ('uni16', 'uni16', 'uni16', 'UNIVERSITY'),
+    ('uni17', 'uni17', 'uni17', 'UNIVERSITY'),
+    ('uni18', 'uni18', 'uni18', 'UNIVERSITY'),
+    ('uni19', 'uni19', 'uni19', 'UNIVERSITY');
+
+
+INSERT INTO universities (location, name, user_id) 
+VALUES
+('Bucharest', 'University of Bucharest', 1),
+('Cluj-Napoca', 'Babeș-Bolyai University', 2),
+('Iași', 'Alexandru Ioan Cuza University', 3),
+('Timișoara', 'Politehnica University of Timișoara', 4),
+('Craiova', 'University of Craiova', 5),
+('Brașov', 'Transilvania University of Brașov', 6),
+('Bucharest', 'Politehnica University of Bucharest', 7),
+('Iași', 'Gheorghe Asachi Technical University', 8),
+('Timișoara', 'West University of Timișoara', 9),
+('Cluj-Napoca', 'Technical University of Cluj-Napoca', 10),
+('Bucharest', 'National University of Arts Bucharest', 11),
+('Bacău', 'George Bacovia University', 12),
+('Pitești', 'University of Pitești', 13),
+('Oradea', 'University of Oradea', 14),
+('Sibiu', 'Lucian Blaga University of Sibiu', 15),
+('Arad', 'Vasile Goldiș Western University of Arad', 16),
+('Galati', 'Dunărea de Jos University of Galați', 17),
+('Ploiești', 'University of Ploiești', 18),
+('Alba Iulia', '1 Decembrie 1918 University of Alba Iulia', 19);
+
+INSERT INTO users (name, email, password, user_type)
+VALUES
+    ('stud1', 'stud1', 'stud1', 'STUDENT'),
+    ('stud2', 'stud2', 'stud2', 'STUDENT'),
+    ('stud3', 'stud3', 'stud3', 'STUDENT'),
+    ('stud4', 'stud4', 'stud4', 'STUDENT'),
+    ('stud5', 'stud5', 'stud5', 'STUDENT'),
+    ('stud6', 'stud6', 'stud6', 'STUDENT'),
+    ('stud7', 'stud7', 'stud7', 'STUDENT'),
+    ('stud8', 'stud8', 'stud8', 'STUDENT'),
+    ('stud9', 'stud9', 'stud9', 'STUDENT'),
+    ('stud10', 'stud10', 'stud10', 'STUDENT'),
+    ('stud11', 'stud11', 'stud11', 'STUDENT'),
+    ('stud12', 'stud12', 'stud12', 'STUDENT'),
+    ('stud13', 'stud13', 'stud13', 'STUDENT'),
+    ('stud14', 'stud14', 'stud14', 'STUDENT'),
+    ('stud15', 'stud15', 'stud15', 'STUDENT'),
+    ('stud16', 'stud16', 'stud16', 'STUDENT'),
+    ('stud17', 'stud17', 'stud17', 'STUDENT'),
+    ('stud18', 'stud18', 'stud18', 'STUDENT'),
+    ('stud19', 'stud19', 'stud19', 'STUDENT'),
+    ('stud20', 'stud20', 'stud20', 'STUDENT');
+
+INSERT INTO Students (
+    user_id, 
+    full_name, 
+    phone_number, 
+    age, 
+    location, 
+    linkedin_link, 
+    github_link, 
+    degree, 
+    expected_graduation_date, 
+    university_id
+) 
+VALUES
+    (20, 'Student 1', '555-0001', 21, 'City 1', 'https://linkedin.com/in/student1', 'https://github.com/student1', 'Computer Science', '2025-06-15', 3),
+    (21, 'Student 2', '555-0002', 22, 'City 2', 'https://linkedin.com/in/student2', 'https://github.com/student2', 'Mathematics', '2025-06-15', 5),
+    (22, 'Student 3', '555-0003', 23, 'City 3', 'https://linkedin.com/in/student3', 'https://github.com/student3', 'Physics', '2025-06-15', 1),
+    (23, 'Student 4', '555-0004', 21, 'City 4', 'https://linkedin.com/in/student4', 'https://github.com/student4', 'Electrical Engineering', '2025-06-15', 7),
+    (24, 'Student 5', '555-0005', 22, 'City 5', 'https://linkedin.com/in/student5', 'https://github.com/student5', 'Software Engineering', '2025-06-15', 2),
+    (25, 'Student 6', '555-0006', 23, 'City 6', 'https://linkedin.com/in/student6', 'https://github.com/student6', 'Cybersecurity', '2025-06-15', 8),
+    (26, 'Student 7', '555-0007', 21, 'City 7', 'https://linkedin.com/in/student7', 'https://github.com/student7', 'Artificial Intelligence', '2025-06-15', 4),
+    (27, 'Student 8', '555-0008', 22, 'City 8', 'https://linkedin.com/in/student8', 'https://github.com/student8', 'Business Administration', '2025-06-15', 6),
+    (28, 'Student 9', '555-0009', 24, 'City 9', 'https://linkedin.com/in/student9', 'https://github.com/student9', 'Biomedical Engineering', '2025-06-15', 9),
+    (29, 'Student 10', '555-0010', 22, 'City 10', 'https://linkedin.com/in/student10', 'https://github.com/student10', 'Mechanical Engineering', '2025-06-15', 10),
+    (30, 'Student 11', '555-0011', 23, 'City 11', 'https://linkedin.com/in/student11', 'https://github.com/student11', 'Finance', '2025-06-15', 11),
+    (31, 'Student 12', '555-0012', 21, 'City 12', 'https://linkedin.com/in/student12', 'https://github.com/student12', 'Chemistry', '2025-06-15', 12),
+    (32, 'Student 13', '555-0013', 22, 'City 13', 'https://linkedin.com/in/student13', 'https://github.com/student13', 'Electrical Engineering', '2025-06-15', 13),
+    (33, 'Student 14', '555-0014', 21, 'City 14', 'https://linkedin.com/in/student14', 'https://github.com/student14', 'Data Science', '2025-06-15', 14),
+    (34, 'Student 15', '555-0015', 24, 'City 15', 'https://linkedin.com/in/student15', 'https://github.com/student15', 'Robotics', '2025-06-15', 15),
+    (35, 'Student 16', '555-0016', 23, 'City 16', 'https://linkedin.com/in/student16', 'https://github.com/student16', 'Information Technology', '2025-06-15', 16),
+    (36, 'Student 17', '555-0017', 22, 'City 17', 'https://linkedin.com/in/student17', 'https://github.com/student17', 'Biology', '2025-06-15', 17),
+    (37, 'Student 18', '555-0018', 24, 'City 18', 'https://linkedin.com/in/student18', 'https://github.com/student18', 'Chemical Engineering', '2025-06-15', 18),
+    (38, 'Student 19', '555-0019', 21, 'City 19', 'https://linkedin.com/in/student19', 'https://github.com/student19', 'Mechanical Engineering', '2025-06-15', 19),
+    (39, 'Student 20', '555-0020', 23, 'City 20', 'https://linkedin.com/in/student20', 'https://github.com/student20', 'Economics', '2025-06-15', 1);
+
+
+INSERT INTO student_skills (student_id, skills)
+VALUES
+    (1, 'Java'),
+    (1, 'C++'),
+    (1, 'Python'),
+    (1, 'SQL'),
+    (3, 'HTML'),
+    (3, 'CSS'),
+    (4, 'JavaScript'),
+    (4, 'React'),
+    (5, 'Data Analysis'),
+    (5, 'Machine Learning'),
+    (6, 'Cybersecurity'),
+    (6, 'Networking'),
+    (7, 'Cloud Computing'),
+    (7, 'DevOps'),
+    (8, 'UI/UX Design'),
+    (8, 'Graphic Design'),
+    (9, 'Embedded Systems'),
+    (9, 'MATLAB'),
+    (10, 'Data Structures'),
+    (10, 'Algorithms'),
+    (11, 'Excel'),
+    (11, 'Accounting Software'),
+    (12, 'Organic Chemistry'),
+    (12, 'Analytical Chemistry'),
+    (13, 'Electrical Circuit Design'),
+    (13, 'Power Systems'),
+    (14, 'R Programming'),
+    (14, 'Big Data'),
+    (15, 'Robotics Programming'),
+    (15, 'ROS'),
+    (16, 'Web Development'),
+    (16, 'REST APIs'),
+    (17, 'Biostatistics'),
+    (17, 'Research Methods'),
+    (18, 'Chemical Process Design'),
+    (18, 'Thermodynamics'),
+    (19, 'Control Systems'),
+    (19, 'AutoCAD'),
+    (10, 'Behavioral Economics'),
+    (10, 'Game Theory');
+
+
+INSERT INTO student_projects (student_id, projects)
+VALUES
+    (7, 'Library Management System'),
+    (10, 'E-commerce Website'),
+    (3, 'Weather Forecasting App'),
+    (12, 'Portfolio Website'),
+    (5, 'Chatbot using Python'),
+    (14, 'Cyber Attack Simulator'),
+    (8, 'Cloud Deployment Tool'),
+    (11, 'Graphic Design Portfolio'),
+    (18, 'IoT-Based Home Automation'),
+    (1, 'Sorting Algorithms Visualization'),
+    (9, 'Financial Budget Tracker'),
+    (16, 'Drug Compound Analysis'),
+    (13, 'Solar Power Optimizer'),
+    (4, 'Social Media Sentiment Analysis'),
+    (6, 'Autonomous Vehicle Navigation'),
+    (19, 'Restaurant Finder App'),
+    (15, 'DNA Sequencing Analysis'),
+    (2, 'Chemical Reaction Simulator'),
+    (17, 'Factory Automation Control System'),
+	 (4, 'Machine Learning Model for Stock Prediction'),
+    (2, 'Personal Finance Management App'),
+    (16, 'Smart Wearable Health Monitor'),
+    (18, 'AI-Based Job Recommendation System'),
+    (9, 'Blockchain-based Voting System'),
+    (10, 'Smart Agriculture System'),
+    (7, 'Speech Recognition App'),
+    (1, 'Mobile Game Development'),
+    (19, 'Smart City Traffic Management'),
+    (15, '3D Printer Control System'),
+    (12, 'Face Recognition for Security System'),
+    (3, 'Virtual Reality Tour for Historical Sites'),
+    (14, 'AI Chatbot for Customer Service'),
+    (5, 'Autonomous Drone Navigation'),
+    (8, 'Online Learning Management System'),
+    (11, 'Real-time Language Translation App'),
+    (13, 'Digital Art Gallery'),
+    (6, 'Weather Monitoring System with IoT'),
+    (17, 'AI-based Fraud Detection System'),
+    (20, 'Online Collaboration Tool for Remote Teams');
+
+INSERT INTO student_hobbies (student_id, hobbies)
+VALUES
+    (7, 'Reading'),
+    (10, 'Traveling'),
+    (3, 'Cooking'),
+    (9, 'Photography'),
+    (6, 'Hiking'),
+    (4, 'Gaming'),
+    (7, 'Gardening'),
+    (12, 'Drawing'),
+    (5, 'Cycling'),
+    (15, 'Swimming'),
+    (2, 'Dancing'),
+    (11, 'Writing'),
+    (8, 'Singing'),
+    (13, 'Painting'),
+    (7, 'Yoga'),
+    (14, 'Running'),
+    (1, 'Chess'),
+    (17, 'Fishing'),
+    (7, 'Woodworking'),
+    (10, 'Knitting');
+
+INSERT INTO student_past_experience (student_id, past_experience)
+VALUES
+    (7, 'Intern at TechCorp'),
+    (10, 'Volunteer at NonProfitOrg'),
+    (3, 'Research Assistant at University Lab'),
+    (9, 'Part-time Web Developer'),
+    (6, 'Freelance Data Analyst'),
+    (4, 'Security Trainee at SecureIT'),
+    (7, 'Cloud Intern at CloudTech'),
+    (12, 'UI/UX Designer at CreativeWorks'),
+    (5, 'Embedded Systems Intern at IoTInc'),
+    (15, 'Algorithm Developer at AlgoSoft'),
+    (2, 'Finance Intern at FinGroup'),
+    (11, 'Lab Assistant at ChemistryLab'),
+    (8, 'Circuit Designer at ElectroTech'),
+    (13, 'Data Scientist at DataCorp'),
+    (7, 'Robot Programmer at RoboSystems'),
+    (14, 'Frontend Developer at WebWorks'),
+    (1, 'Biology Researcher at BioLab'),
+    (17, 'Chemical Engineer Trainee at ChemPlant'),
+    (10, 'Control Engineer at AutomationCo'),
+    (19, 'Economic Analyst Intern at EconData');
+
+INSERT INTO users (name, email, password, user_type)
+VALUES
+    ('comp1', 'comp1', 'comp1', 'COMPANY'),
+    ('comp2', 'comp2', 'comp2', 'COMPANY'),
+    ('comp3', 'comp3', 'comp3', 'COMPANY'),
+    ('comp4', 'comp4', 'comp4', 'COMPANY'),
+    ('comp5', 'comp5', 'comp5', 'COMPANY');
+
+INSERT INTO companies (company_size, description, field_of_work, location, name, website_link, user_id)
+VALUES
+    ('Small', 'A startup focused on developing AI-based software solutions', 'Software Development', 'Bucharest', 'AI Solutions Inc.', 'https://www.aisolutions.com', 40),
+    ('Medium', 'A growing company specializing in cloud-based services and solutions', 'Cloud Computing', 'Cluj-Napoca', 'CloudTech Solutions', 'https://www.cloudtech.com', 41),
+    ('Large', 'A multinational company providing financial services and consulting', 'Finance', 'Iași', 'FinServ Group', 'https://www.finservgroup.com', 42),
+    ('Medium', 'A company developing cutting-edge robotics for industrial automation', 'Robotics', 'Timișoara', 'RoboIndustries', 'https://www.roboindustries.com', 43),
+    ('Large', 'A global leader in cybersecurity solutions', 'Cybersecurity', 'Craiova', 'SecureNet Technologies', 'https://www.securenet.com', 44);
+
+INSERT INTO internships (description, duration, is_active, location, requirements, title, company_id, remaining_slots)
+VALUES
+    ('A dynamic internship focused on software development in a fast-paced environment.', '6 months', true, 'Bucharest', 'Knowledge of Java, Python, and SQL', 'Software Development Intern', 1, 2),
+    ('Assist with cloud infrastructure projects and gain hands-on experience with cloud services.', '3 months', true, 'Cluj-Napoca', 'Experience with AWS, Google Cloud, or Azure', 'Cloud Intern', 2, 1),
+    ('A role to work with financial data analysis and reporting.', '4 months', true, 'Iași', 'Strong knowledge in Excel and financial modeling', 'Financial Analyst Intern', 3, 7),
+    ('Work on innovative robotic technologies for manufacturing and automation processes.', '5 months', true, 'Timișoara', 'Background in Robotics or Mechanical Engineering', 'Robotics Engineering Intern', 4, 2),
+    ('Support cybersecurity initiatives by working on threat analysis and security protocols.', '6 months', false, 'Craiova', 'Understanding of network security and ethical hacking', 'Cybersecurity Intern', 5, 9),
+    ('Help develop new AI-driven applications with a focus on natural language processing.', '6 months', true, 'Bucharest', 'Experience with Python and AI frameworks', 'AI Developer Intern', 1, 2),
+    ('Collaborate with the software team to design and implement database solutions.', '3 months', true, 'Cluj-Napoca', 'Knowledge of SQL and database management systems', 'Database Intern', 2, 3),
+    ('Assist in the development of financial forecasting models and risk management systems.', '4 months', false, 'Iași', 'Background in Statistics and Finance', 'Risk Management Intern', 3, 1),
+    ('Participate in the design and testing of autonomous robots for industrial tasks.', '6 months', true, 'Timișoara', 'Experience in coding and hardware integration', 'Autonomous Systems Intern', 4, 2),
+    ('Work with the cybersecurity team to monitor and respond to security incidents.', '6 months', true, 'Craiova', 'Familiarity with security software and firewalls', 'Security Operations Intern', 5, 8);
+
+
+INSERT INTO users (name, email, password, user_type)
+VALUES
+    ('stud21', 'stud21', 'stud21', 'STUDENT'),
+    ('stud22', 'stud22', 'stud22', 'STUDENT'),
+    ('stud23', 'stud23', 'stud23', 'STUDENT'),
+    ('stud24', 'stud24', 'stud24', 'STUDENT'),
+    ('stud25', 'stud25', 'stud25', 'STUDENT'),
+    ('stud26', 'stud26', 'stud26', 'STUDENT'),
+    ('stud27', 'stud27', 'stud27', 'STUDENT');
+
+INSERT INTO Students (
+    user_id, 
+    full_name, 
+    phone_number, 
+    age, 
+    location, 
+    linkedin_link, 
+    github_link, 
+    degree, 
+    expected_graduation_date, 
+    university_id
+) 
+VALUES
+    (45, 'Student 21', '555-0021', 21, 'City 21', 'https://linkedin.com/in/student21', 'https://github.com/student21', 'Computer Science', '2025-06-15', 3),
+    (46, 'Student 22', '555-0022', 22, 'City 22', 'https://linkedin.com/in/student22', 'https://github.com/student22', 'Mathematics', '2025-06-15', 3),
+    (47, 'Student 23', '555-0023', 23, 'City 23', 'https://linkedin.com/in/student23', 'https://github.com/student23', 'Physics', '2025-06-15', 3),
+    (48, 'Student 24', '555-0024', 21, 'City 24', 'https://linkedin.com/in/student24', 'https://github.com/student24', 'Electrical Engineering', '2025-06-15', 3),
+    (49, 'Student 25', '555-0025', 22, 'City 25', 'https://linkedin.com/in/student25', 'https://github.com/student25', 'Software Engineering', '2025-06-15', 3),
+    (50, 'Student 26', '555-0026', 23, 'City 26', 'https://linkedin.com/in/student26', 'https://github.com/student26', 'Cybersecurity', '2025-06-15', 3),
+    (51, 'Student 27', '555-0027', 21, 'City 27', 'https://linkedin.com/in/student27', 'https://github.com/student27', 'Artificial Intelligence', '2025-06-15', 3);

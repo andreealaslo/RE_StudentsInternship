@@ -16,7 +16,9 @@ import ListMyStudents from "./universities/ListMyStudents";
 import StudentDetails from "./students/StudentDetails";
 import ListMyApplications from "./students/ListMyApplications";
 import ApplicationDetails from "./internship-applications/ApplicationDetails";
+import ManageDocuments from "./documents/ManageDocuments";
 import "./global.css";
+
 const App: React.FC = () => {
     return (
         <Router>
@@ -58,6 +60,7 @@ const App: React.FC = () => {
                     path="/applications/:id"
                     element={<ApplicationDetails />}
                 />
+                <Route path="/manage-documents" element={<ManageDocuments/>} />
             </Routes>
         </Router>
     );
