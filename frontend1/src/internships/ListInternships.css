@@ -1,23 +1,13 @@
-body, html {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto; /* Enable scrolling */
-}
-
 .internships-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    max-width: 1200px;
+    max-width: 100vw;
     padding: 20px;
     box-sizing: border-box;
-    overflow: auto; /* Allow the content to scroll if it overflows */
+    overflow: auto;/* Allow the content to scroll if it overflows */
 }
 
 .internships-title {
@@ -31,7 +21,7 @@ body, html {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    width: 100%;
+    width: 70%;
     justify-content: center;
 }
 
@@ -40,7 +30,7 @@ body, html {
     flex-wrap: wrap; /* Ensure the internships are displayed horizontally */
     gap: 20px; /* Space between internship cards */
     justify-content: center;
-    width: 100%;
+    width: 70%;
     margin-top: 20px;
     overflow-x: hidden; /* Avoid horizontal scrolling */
 }

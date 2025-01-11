@@ -37,4 +37,15 @@ public class UniversityController {
         List<University> universities = universityService.getAllUniversities();
         return ResponseEntity.ok(universities);
     }
+
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<University> getUniversityByStudentId(@PathVariable Long studentId) {
+        University university = universityService.getUniversityByStudentId(studentId);
+        if (university != null) {
+            return ResponseEntity.ok(university);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

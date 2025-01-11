@@ -180,8 +180,21 @@ const ListInternships: React.FC = () => {
         navigate("/my-applications", { state: { studentId } });
     };
 
+    const handleViewDocuments = () => {
+        navigate("/manage-documents");
+    };
+
     return (
-        <div className="internships-container">
+        <div className="page-container">
+            <div className="back-logout-buttons-container">
+                                                <Box display="flex" justifyContent="space-between" margin="3px">
+                                                <div></div>
+                                                <Button variant="contained" color="secondary" onClick={handleLogout}>
+                                                        Logout
+                                                    </Button>
+                                                </Box>
+                        </div>
+            <div className="internships-container">
             <h1 className="internships-title">Internships</h1>
             {userType && (
                 <Typography
@@ -207,10 +220,21 @@ const ListInternships: React.FC = () => {
 
             <Box
                 display="flex"
-                flexDirection="column"
-                alignItems="flex-end"
                 style={{ marginTop: "20px" }}
+                justifyContent="space-between"
+                gap="10vw"
+                
+                
             >
+                {(userType === "STUDENT"  || userType === "UNIVERSITY") && (
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={handleViewDocuments}
+                    >
+                        Documents
+                    </Button>
+                )}
                 {userType === "STUDENT" && (
                     <Button
                         variant="contained"
@@ -238,14 +262,6 @@ const ListInternships: React.FC = () => {
                         My Students
                     </Button>
                 )}
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    onClick={handleLogout}
-                    style={{ marginTop: "10px" }}
-                >
-                    Logout
-                </Button>
             </Box>
 
             {loading ? (
@@ -285,6 +301,8 @@ const ListInternships: React.FC = () => {
                     )}
                 </div>
             )}
+            </div>
+            
         </div>
     );
 };

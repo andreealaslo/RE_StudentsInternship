@@ -81,4 +81,15 @@ public class DocumentController {
         List<DocumentDTO> documents = documentService.getDocumentsByStudent(studentId);
         return ResponseEntity.ok(documents);
     }
+
+    // Endpoint to delete a document by ID
+    @DeleteMapping("/{fileId}")
+    public ResponseEntity<String> deleteDocument(@PathVariable Long fileId) {
+        try {
+            documentService.deleteDocument(fileId);
+            return ResponseEntity.ok("File deleted successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("File deletion failed: " + e.getMessage());
+        }
+    }
 }

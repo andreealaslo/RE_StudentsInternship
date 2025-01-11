@@ -1,0 +1,28 @@
+
+.manage-documents-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.back-logout-buttons-container {
+    
+    
+}
+
+.documents-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    width: 50%;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

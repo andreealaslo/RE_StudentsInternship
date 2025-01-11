@@ -133,4 +133,15 @@ public class DocumentService {
         }).collect(Collectors.toList());
     }
 
+    public void deleteDocument(Long fileId) throws IOException {
+        Document document = documentRepository.findById(fileId)
+                .orElseThrow(() -> new RuntimeException("File not found"));
+
+        // Delete the file from the local storage
+        Path filePath = Paths.get(document.getFilePath());
+        Files.deleteIfExists(filePath);
+
+        // Delete the document record from the database
+        documentRepository.delete(document);
+    }
 }

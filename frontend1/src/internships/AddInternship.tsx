@@ -69,8 +69,8 @@ const AddInternship: React.FC = () => {
             if (response.ok) {
                 setSuccessMessage("Internship added successfully!");
                 setTimeout(() => {
-                    navigate("/my-internships");
-                }, 2000);
+                    navigate(-1);
+                }, 1000);
             } else {
                 const errorData = await response.json();
                 setErrorMessage(errorData.message || "Failed to add internship.");
