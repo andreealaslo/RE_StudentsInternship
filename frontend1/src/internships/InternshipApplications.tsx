@@ -103,9 +103,18 @@ const InternshipApplications: React.FC = () => {
                 </Box>
              </div>
              <div className="applications-container">
-             <Typography variant="h4" gutterBottom>
+             <Typography variant="h3"
+                            sx={{
+                                fontWeight: "bold",
+                                textAlign: "center",
+                                marginBottom: 4,
+                                marginTop: 4,
+                                fontSize: '2.5rem',
+                                color: '#333'
+                            }}>
                 Applications for Internship
             </Typography>
+            
 
             {loading ? (
                 <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
@@ -133,16 +142,16 @@ const InternshipApplications: React.FC = () => {
                                         </Typography>
                                         <Divider />
                                         <Box sx={{ marginTop: 1 }}>
-                                            <Typography variant="body1" color="blue">
+                                            <Typography variant="body1">
                                                 <strong>Name:</strong> {application.student.fullName}
                                             </Typography>
-                                            <Typography variant="body1" color="blue">
+                                            <Typography variant="body1">
                                                 <strong>Phone Number:</strong> {application.student.phoneNumber}
                                             </Typography>
-                                            <Typography variant="body1" color="blue">
+                                            <Typography variant="body1">
                                                 <strong>Age:</strong> {application.student.age}
                                             </Typography>
-                                            <Typography variant="body1" color="blue">
+                                            <Typography variant="body1">
                                                 <strong>Location:</strong> {application.student.location}
                                             </Typography>
                                         </Box>
@@ -186,7 +195,7 @@ const InternshipApplications: React.FC = () => {
                                         <Box sx={{ marginTop: 2, display: "flex", justifyContent: "space-between" }}>
                                             <Button
                                                 variant="contained"
-                                                color="primary"
+                                                color="success"
                                                 onClick={() => handleStatusChange(application.id, "ACCEPTED")}
                                             >
                                                 Accept

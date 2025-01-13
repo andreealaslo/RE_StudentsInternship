@@ -149,7 +149,7 @@ const AddInternship: React.FC = () => {
                 />
                 <Box mt={2} display="flex" justifyContent="space-between">
                     <Button
-                        onClick={() => navigate("/internships")}
+                        onClick={() => navigate(-1)}
                         variant="outlined"
                         color="secondary"
                         disabled={loading}

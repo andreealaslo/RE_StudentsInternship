@@ -227,9 +227,10 @@ const ManageDocuments: React.FC = () => {
             </div>
             <div className="content-container">
             <Box display="flex" justifyContent="space-between" alignItems="center" style={{ marginBottom: "20px" }}>
-                <Typography variant="h4" style={{ flexGrow: 1, textAlign: "center" }}>
-                    Manage Documents
-                </Typography>
+                <h1>
+                Manage Documents
+                </h1>
+                    
             </Box>
             <div className="documents-container">
             {loading ? (
@@ -240,7 +241,7 @@ const ManageDocuments: React.FC = () => {
                 <>
             <Typography 
                 variant="h6" 
-                style={{ marginBottom: '10px', textAlign: 'center', fontWeight: 'bold' }}
+                style={{ marginBottom: '10px', textAlign: 'center', fontWeight: 'bold', color: '#333' }}
             >
                 Documents from University
             </Typography>
@@ -299,13 +300,22 @@ const ManageDocuments: React.FC = () => {
             <Box
                 display="flex"
                 flexDirection="row"
-                alignItems="center"
-                justifyContent="space-evenly"
-                width="60%"
+                alignItems="flex-end"
+                justifyContent="flex-end"
+                width="50%"
                 style={{ marginTop: "20px" }}
             >
-                <Typography variant="h6" gutterBottom>Upload File</Typography>
-                <input type="file" onChange={handleFileChange} />
+                <Box
+                display="flex"
+                flexDirection="column"
+                
+                >
+                    <Typography variant="h6" gutterBottom>Upload File</Typography>
+                    <div className="input_container">
+                    <input type="file" id="fileUpload" onChange={handleFileChange} />
+
+                    </div>
+                </Box>
                 <Button variant="contained" color="primary" onClick={handleUpload} style={{ marginTop: '10px' }}>
                     Upload
                 </Button>
@@ -326,7 +336,7 @@ const ManageDocuments: React.FC = () => {
                 <>
             <Typography 
                 variant="h6" 
-                style={{ marginBottom: '10px', textAlign: 'center', fontWeight: 'bold' }}
+                style={{ marginBottom: '10px', textAlign: 'center', fontWeight: 'bold', color: '#333' }}
             >
                 Your documents
             </Typography>
@@ -355,7 +365,7 @@ const ManageDocuments: React.FC = () => {
                                                 <DeleteIcon style={{ color: 'red' }} />
                                             </Button>
                                             </TableCell>
-                                        <TableCell>
+                                        <TableCell sx={{ width: '50px' }}>
                                             <img
                                                 src={downloadIcon}
                                                 alt="Download"

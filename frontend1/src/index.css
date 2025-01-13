@@ -20,16 +20,22 @@
     margin-bottom: 50px;
 }
 
+
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #b52b6e;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #800641;
+}
+
+input {
+  font-family: 'Red Hat Display';
 }
 
 h1 {
+  font-family: 'Funnel Display';
   font-size: 3.2em;
   line-height: 1.1;
 }
@@ -41,6 +47,18 @@ html, body {
   background: linear-gradient(to right, pink, white, pink);
   
   overflow-x: hidden;  /* Prevent horizontal scroll */
+  font-family: 'Red Hat Display';
+}
+
+select {
+  font-family: 'Red Hat Display';
+  background-color: #fff;
+  color: #000;
+}
+
+textarea {
+  background-color: #fff;
+  color: #000;
 }
 
 body {
@@ -61,7 +79,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #b52b6e;
 }
 button:focus,
 button:focus-visible {
@@ -74,9 +92,41 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #800641;
   }
   button {
     background-color: #f9f9f9;
   }
+}
+
+
+/* .input_container {
+  
+} */
+
+input[type=file]::file-selector-button {
+  background-color: #fff;
+  color: #000;
+  border: 1px #cc89a9 solid ;
+  padding: 10px 15px;
+  margin-right: 20px;
+  transition: .5s;
+  border-radius: 10px;
+  font-family: 'Red Hat Display';
+}
+
+input[type=file]::file-selector-button:hover {
+  background-color: #eee;
+}
+
+input{
+  background-color: #fff;
+  color: #000;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #333;
 }

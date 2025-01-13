@@ -55,7 +55,7 @@
 .create-profile-submit-button {
     margin-top: 10px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #c7367c;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -66,7 +66,7 @@
 .add-button:hover,
 .remove-button:hover,
 .create-profile-submit-button:hover {
-    background-color: #0056b3;
+    background-color: #b81d68;
 }
 
 @media (max-width: 750px) {

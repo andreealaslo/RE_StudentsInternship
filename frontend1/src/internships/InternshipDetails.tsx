@@ -145,10 +145,13 @@ const InternshipDetails: React.FC = () => {
             <Typography
                 variant="h3"
                 sx={{
+                    fontFamily: 'Funnel Display',
                     fontWeight: "bold",
                     textAlign: "center",
                     marginBottom: 4,
                     marginTop: 4,
+                    fontSize: '2.5rem',
+                    color: '#333'
                 }}
             >
                 Internship Details

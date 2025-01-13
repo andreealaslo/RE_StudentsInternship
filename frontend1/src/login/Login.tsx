@@ -57,7 +57,7 @@ const Login: React.FC = () => {
 
     return (
         <div className="login-container">
-            <h1 className="login-title">Welcome to Students' Internships!</h1>
+            <h1 className="login-title">Welcome to Internship Finder!</h1>
             <div className="login-form">
                 <input
                     type="email"

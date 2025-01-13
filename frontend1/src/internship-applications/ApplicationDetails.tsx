@@ -55,8 +55,24 @@ const ApplicationDetails: React.FC = () => {
     const navigate = useNavigate();
     const application: Application | null = location.state?.application || null;
 
+    const handleLogout = () => {
+        // Clear localStorage and navigate to login page
+        localStorage.clear();
+        navigate("/");
+    };
+
     return (
         <div>
+            <div className="back-logout-buttons-container">
+                        <Box display="flex" justifyContent="space-between" margin="3px">
+                        <Button variant="contained" color="primary" onClick={() => navigate(-1)}>
+                                    Back
+                        </Button>
+                        <Button variant="contained" color="secondary" onClick={handleLogout}>
+                                Logout
+                            </Button>
+                        </Box>
+                        </div>
             <Typography
                 variant="h3"
                 sx={{
@@ -64,6 +80,8 @@ const ApplicationDetails: React.FC = () => {
                     textAlign: "center",
                     marginBottom: 4,
                     marginTop: 4,
+                    fontSize: '2.5rem',
+                    color: '#333'
                 }}
             >
                 Application Details
@@ -215,13 +233,6 @@ const ApplicationDetails: React.FC = () => {
                                     justifyContent: "center",
                                 }}
                             >
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={() => navigate(-1)}
-                                >
-                                    Back
-                                </Button>
                             </Box>
                         </CardContent>
                     </Card>
