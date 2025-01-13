@@ -17,6 +17,7 @@ const AddInternship: React.FC = () => {
         location: "",
         duration: "",
         requirements: "",
+        remainingSlots: 0, // New field added here
     });
     const [loading, setLoading] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -29,15 +30,18 @@ const AddInternship: React.FC = () => {
         const { name, value } = e.target;
         setFormValues((prevValues) => ({
             ...prevValues,
-            [name]: value,
+            [name]: name === "remainingSlots" ? parseInt(value, 10) : value, // Parse remainingSlots as a number
         }));
     };
 
     const validateForm = () => {
-        const { title, description, location, duration, requirements } =
-            formValues;
+        const { title, description, location, duration, requirements, remainingSlots } = formValues;
         if (!title || !description || !location || !duration || !requirements) {
             setErrorMessage("All fields are required.");
+            return false;
+        }
+        if (remainingSlots < 0) {
+            setErrorMessage("Remaining slots must be a non-negative number.");
             return false;
         }
         return true;
@@ -145,6 +149,16 @@ const AddInternship: React.FC = () => {
                     margin="normal"
                     multiline
                     rows={3}
+                    required
+                />
+                <TextField
+                    label="Available Slots"
+                    name="remainingSlots"
+                    type="number" // Specify this as a number input
+                    value={formValues.remainingSlots}
+                    onChange={handleChange}
+                    fullWidth
+                    margin="normal"
                     required
                 />
                 <Box mt={2} display="flex" justifyContent="space-between">

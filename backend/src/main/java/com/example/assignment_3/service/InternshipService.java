@@ -39,7 +39,7 @@ public class InternshipService {
         internship.setLocation(internshipDTO.getLocation());
         internship.setDuration(internshipDTO.getDuration());
         internship.setRequirements(internshipDTO.getRequirements());
-        internship.setRequirements(String.valueOf(internshipDTO.getRemainingSlots()));
+        internship.setRemainingSlots(Integer.parseInt(String.valueOf(internshipDTO.getRemainingSlots())));
         internshipRepository.save(internship);
         return "Internship created successfully.";
     }
